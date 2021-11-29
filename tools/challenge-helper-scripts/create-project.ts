@@ -1,27 +1,12 @@
-import fs from 'fs/promises';
 import { existsSync } from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
-import { format } from 'prettier';
 import { prompt } from 'inquirer';
+import { format } from 'prettier';
 
-import { createStepFile } from './utils.js';
+import { SuperBlocks } from '../../config/certification-settings';
 import { blockNameify } from '../../utils/block-nameify';
-
-const superBlocks = [
-  'responsive-web-design',
-  'javascript-algorithms-and-data-structures',
-  'front-end-libraries',
-  'data-visualization',
-  'apis-and-microservices',
-  'quality-assurance',
-  'scientific-computing-with-python',
-  'data-analysis-with-python',
-  'information-security',
-  'machine-learning-with-python',
-  'coding-interview-prep'
-] as const;
-
-type SuperBlock = typeof superBlocks[number];
+import { createStepFile } from './utils.js';
 
 const helpCategories = ['HTML-CSS', 'JavaScript', 'Python'] as const;
 
@@ -34,7 +19,7 @@ type SuperBlockInfo = {
   blocks: Record<string, BlockInfo>;
 };
 
-type IntroJson = Record<SuperBlock, SuperBlockInfo>;
+type IntroJson = Record<SuperBlocks, SuperBlockInfo>;
 
 type Meta = {
   name: string;
@@ -51,7 +36,7 @@ type Meta = {
 };
 
 async function createProject(
-  superBlock: SuperBlock,
+  superBlock: SuperBlocks,
   block: string,
   helpCategory: string,
   order: number,
@@ -86,7 +71,7 @@ async function createProject(
 }
 
 async function updateIntroJson(
-  superBlock: SuperBlock,
+  superBlock: SuperBlocks,
   block: string,
   title: string
 ) {
@@ -138,7 +123,7 @@ async function updateBlockNames(block: string, title: string) {
 }
 
 async function createMetaJson(
-  superBlock: SuperBlock,
+  superBlock: SuperBlocks,
   block: string,
   title: string,
   order: number,
@@ -149,9 +134,9 @@ async function createMetaJson(
   newMeta.name = title;
   newMeta.dashedName = block;
   newMeta.order = order;
-  newMeta.superOrder = superBlocks.indexOf(superBlock) + 1;
+  newMeta.superOrder = Object.values(SuperBlocks).indexOf(superBlock) + 1;
   newMeta.superBlock = superBlock;
-  newMeta.challengeOrder = [[challengeId, 'Part 1']];
+  newMeta.challengeOrder = [[challengeId, 'Step 1']];
   const newMetaDir = path.resolve(metaDir, block);
   if (!existsSync(newMetaDir)) {
     await fs.mkdir(newMetaDir);
@@ -171,9 +156,11 @@ block: ${block}
 superBlock: Responsive Web Design
 isBeta: true
 ---
+
 ## Introduction to the ${title}
 
-This is a test for the new project-based curriculum.`;
+This is a test for the new project-based curriculum.
+`;
   const dirPath = path.resolve(
     __dirname,
     `../../client/src/pages/learn/${superBlock}/${block}/`
@@ -188,10 +175,10 @@ This is a test for the new project-based curriculum.`;
 }
 
 async function createFirstChallenge(
-  superBlock: SuperBlock,
+  superBlock: SuperBlocks,
   block: string
 ): Promise<string> {
-  const superBlockId = (superBlocks.indexOf(superBlock) + 1)
+  const superBlockId = (Object.values(SuperBlocks).indexOf(superBlock) + 1)
     .toString()
     .padStart(2, '0');
   const newChallengeDir = path.resolve(
@@ -232,9 +219,9 @@ prompt([
   {
     name: 'superBlock',
     message: 'Which certification does this belong to?',
-    default: 'responsive-web-design',
+    default: SuperBlocks.RespWebDesign,
     type: 'list',
-    choices: superBlocks
+    choices: SuperBlocks
   },
   {
     name: 'block',

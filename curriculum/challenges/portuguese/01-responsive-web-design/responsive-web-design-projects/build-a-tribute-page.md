@@ -1,6 +1,6 @@
 ---
 id: bd7158d8c442eddfaeb5bd18
-title: Crie uma página de homenagem
+title: Criar uma página de homenagem
 challengeType: 3
 forumTopicId: 301147
 dashedName: build-a-tribute-page
@@ -18,7 +18,7 @@ Você pode usar HTML, JavaScript e CSS para completar este projeto. É recomenda
 
 **Especificação de usuário nº 2:** deve haver um elemento com `id="title"`, que contenha um texto que descreva a pessoa a quem a página presta homenagem (por exemplo, "Dr. Norman Borlaug").
 
-**Especificação de usuário nº 3:** deve haver uma `div` com um `id="img-div"`.
+**Especificação de usuário nº 3:** deve haver um elemento `figure` ou `div` com um `id="img-div"` correspondente.
 
 **Especificação de usuário nº 4:** dentro do elemento de id `img-div`, deve haver um elemento `img` com um `id="image"`.
 

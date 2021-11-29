@@ -1,17 +1,10 @@
+import path from 'path';
+import debug from 'debug';
+import dedent from 'dedent';
 import _ from 'lodash';
 import loopback from 'loopback';
-import path from 'path';
-import dedent from 'dedent';
 import { Observable } from 'rx';
-import debug from 'debug';
 import { isEmail } from 'validator';
-import { reportError } from '../middlewares/sentry-error-handler.js';
-
-import { ifNoUser401 } from '../utils/middleware';
-import { observeQuery } from '../utils/rx';
-
-import { getChallenges } from '../utils/get-curriculum';
-
 import {
   completionHours,
   certTypes,
@@ -22,6 +15,11 @@ import {
   oldDataVizId,
   superBlockCertTypeMap
 } from '../../../../config/certification-settings';
+import { reportError } from '../middlewares/sentry-error-handler.js';
+
+import { getChallenges } from '../utils/get-curriculum';
+import { ifNoUser401 } from '../utils/middleware';
+import { observeQuery } from '../utils/rx';
 
 const {
   legacyFrontEndChallengeId,
@@ -30,7 +28,7 @@ const {
   legacyInfosecQaId,
   legacyFullStackId,
   respWebDesignId,
-  frontEndLibsId,
+  frontEndDevLibsId,
   jsAlgoDataStructId,
   dataVis2018Id,
   apisMicroservicesId,
@@ -38,7 +36,8 @@ const {
   infosecV7Id,
   sciCompPyV7Id,
   dataAnalysisPyV7Id,
-  machineLearningPyV7Id
+  machineLearningPyV7Id,
+  relationalDatabasesV8Id
 } = certIds;
 
 const log = debug('fcc:certification');
@@ -59,8 +58,15 @@ export default function bootCertificate(app) {
   app.use(api);
 }
 
-export function getFallbackFrontEndDate(completedChallenges, completedDate) {
-  var chalIds = [...Object.values(certTypeIdMap), oldDataVizId];
+export function getFallbackFullStackDate(completedChallenges, completedDate) {
+  var chalIds = [
+    certTypeIdMap[certTypes.respWebDesign],
+    certTypeIdMap[certTypes.jsAlgoDataStruct],
+    certTypeIdMap[certTypes.frontEndDevLibsId],
+    certTypeIdMap[certTypes.dataVis2018],
+    certTypeIdMap[certTypes.apisMicroservicesId],
+    certTypeIdMap[certTypes.legacyInfosecQaId]
+  ];
 
   const latestCertDate = completedChallenges
     .filter(chal => chalIds.includes(chal.id))
@@ -94,7 +100,7 @@ function createCertTypeIds(allChallenges) {
 
     // modern
     [certTypes.respWebDesign]: getCertById(respWebDesignId, allChallenges),
-    [certTypes.frontEndLibs]: getCertById(frontEndLibsId, allChallenges),
+    [certTypes.frontEndDevLibs]: getCertById(frontEndDevLibsId, allChallenges),
     [certTypes.dataVis2018]: getCertById(dataVis2018Id, allChallenges),
     [certTypes.jsAlgoDataStruct]: getCertById(
       jsAlgoDataStructId,
@@ -113,6 +119,10 @@ function createCertTypeIds(allChallenges) {
     ),
     [certTypes.machineLearningPyV7]: getCertById(
       machineLearningPyV7Id,
+      allChallenges
+    ),
+    [certTypes.relationalDatabasesV8]: getCertById(
+      relationalDatabasesV8Id,
       allChallenges
     )
   };
@@ -460,7 +470,7 @@ function createShowCert(app) {
 
         // if fullcert is not found, return the latest completedDate
         if (certType === 'isFullStackCert' && !certChallenge) {
-          completedDate = getFallbackFrontEndDate(
+          completedDate = getFallbackFullStackDate(
             completedChallenges,
             completedDate
           );

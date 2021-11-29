@@ -1,6 +1,6 @@
 ---
 id: 587d7daa367417b2b2512b6c
-title: Transforme um Array em uma String Usando o Método join
+title: Transformar um array em uma string usando o método join
 challengeType: 1
 forumTopicId: 18221
 dashedName: combine-an-array-into-a-string-using-the-join-method
@@ -10,17 +10,17 @@ dashedName: combine-an-array-into-a-string-using-the-join-method
 
 O método `join` é usado para juntar os elementos de um array, resultando em uma string. Ele recebe um delimitador como argumento, que é usado para conectar os elementos na string.
 
-Um exemplo:
+Exemplo:
 
 ```js
-var arr = ["Hello", "World"];
-var str = arr.join(" ");
+const arr = ["Hello", "World"];
+const str = arr.join(" ");
 ```
 
 O valor de `str` é `Hello World`.
 # --instructions--
 
-Use o método `join` (junto com outros) dentro da função `sentensify` para criar uma frase a partir das palavras da string `str`. A função deve retornar uma string. Por exemplo, `I-like-Star-Wars` deve ser convertido para `I like Star Wars`. Não use o método `replace` neste desafio.
+Use o método `join` (entre outros) dentro da função `sentensify` para criar uma frase a partir das palavras da string `str`. A função deve retornar uma string. Por exemplo, `I-like-Star-Wars` deve ser convertido para `I like Star Wars`. Não use o método `replace` neste desafio.
 
 # --hints--
 
@@ -76,6 +76,7 @@ function sentensify(str) {
 
   // Only change code above this line
 }
+
 sentensify("May-the-force-be-with-you");
 ```
 
@@ -83,8 +84,6 @@ sentensify("May-the-force-be-with-you");
 
 ```js
 function sentensify(str) {
-  // Only change code below this line
   return str.split(/\W/).join(' ');
-  // Only change code above this line
 }
 ```

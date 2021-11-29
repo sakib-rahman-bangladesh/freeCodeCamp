@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { withTranslation, useTranslation } from 'react-i18next';
-
-import { StepsType } from '../../../redux/prop-types';
-import GreenPass from '../../../assets/icons/green-pass';
 import GreenNotCompleted from '../../../assets/icons/green-not-completed';
+import GreenPass from '../../../assets/icons/green-pass';
+import { StepsPropType } from '../../../redux/prop-types';
 
 const mapIconStyle = { height: '15px', marginRight: '10px', width: '15px' };
 
 const propTypes = {
   i18nCertText: PropTypes.string,
   isProjectsCompleted: PropTypes.bool,
-  steps: StepsType,
+  steps: StepsPropType,
   superBlock: PropTypes.string
 };
 
@@ -39,6 +38,7 @@ const ClaimCertSteps = ({
     isShowCerts = false,
     isShowProfile = false
   } = steps;
+
   return (
     <ul className='map-challenges-ul' data-cy='claim-cert-steps'>
       <li className='map-challenge-title map-challenge-wrap'>

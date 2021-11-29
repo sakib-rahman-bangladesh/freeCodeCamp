@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-import GreenNotCompleted from '../../../assets/icons/green-not-completed';
-import ScrollableAnchor from 'react-scrollable-anchor';
-// import { navigate } from 'gatsby';
 import { useTranslation } from 'react-i18next';
-import ClaimCertSteps from './ClaimCertSteps';
-import GreenPass from '../../../assets/icons/green-pass';
-import { StepsType } from '../../../redux/prop-types';
+import ScrollableAnchor from 'react-scrollable-anchor';
 import Caret from '../../../assets/icons/caret';
+import GreenNotCompleted from '../../../assets/icons/green-not-completed';
+// import { navigate } from 'gatsby';
+import GreenPass from '../../../assets/icons/green-pass';
+import { StepsPropType } from '../../../redux/prop-types';
+import ClaimCertSteps from './ClaimCertSteps';
 
 const propTypes = {
   i18nCertText: PropTypes.string,
@@ -17,7 +17,7 @@ const propTypes = {
     numberOfSteps: PropTypes.number,
     completedCount: PropTypes.number
   }),
-  steps: StepsType,
+  steps: StepsPropType,
   superBlock: PropTypes.string
 };
 

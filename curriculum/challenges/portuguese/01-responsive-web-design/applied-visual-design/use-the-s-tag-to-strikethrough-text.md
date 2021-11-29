@@ -1,6 +1,6 @@
 ---
 id: 587d781b367417b2b2512aba
-title: Use a tag s para deixar o texto tachado
+title: Usar a tag s para deixar o texto tachado
 challengeType: 0
 videoUrl: ''
 forumTopicId: 301079
@@ -13,7 +13,7 @@ Para deixar o texto tachado, ou seja, para que uma linha horizontal corte os car
 
 # --instructions--
 
-Envolva a tag `s` em torno da palavra `Google` que está dentro da tag `h4` e, em seguida, adicione a palavra `Alphabet` ao lado dela. Essa segunda palavra não deverá estar tachada.
+Envolva a tag `s` em torno da palavra `Google` que está dentro da tag `h4` e, em seguida, adicione a palavra `Alphabet` ao lado dela sem a formatação tachada.
 
 # --hints--
 

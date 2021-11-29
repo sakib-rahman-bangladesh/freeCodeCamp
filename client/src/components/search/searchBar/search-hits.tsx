@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { connectStateResults, connectHits } from 'react-instantsearch-dom';
-import { SearchState, Hit } from 'react-instantsearch-core';
 import { isEmpty } from 'lodash-es';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SearchState, Hit } from 'react-instantsearch-core';
+import { connectStateResults, connectHits } from 'react-instantsearch-dom';
 import { searchPageUrl } from '../../../utils/algolia-locale-setup';
-import Suggestion from './search-suggestion';
 import NoHitsSuggestion from './no-hits-suggestion';
+import Suggestion from './search-suggestion';
 
 const searchUrl = searchPageUrl;
-interface customHitsPropTypes {
+interface CustomHitsProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   hits: Array<any>;
   searchQuery: string;
@@ -17,7 +17,7 @@ interface customHitsPropTypes {
   selectedIndex: number;
   handleHits: (currHits: Array<Hit>) => void;
 }
-interface searchHitsPropTypes {
+interface SearchHitsProps {
   searchState: SearchState;
   handleMouseEnter: (e: React.SyntheticEvent<HTMLElement, Event>) => void;
   handleMouseLeave: (e: React.SyntheticEvent<HTMLElement, Event>) => void;
@@ -32,7 +32,7 @@ const CustomHits = connectHits(
     handleMouseLeave,
     selectedIndex,
     handleHits
-  }: customHitsPropTypes) => {
+  }: CustomHitsProps) => {
     const { t } = useTranslation();
     const noHits = isEmpty(hits);
     const noHitsTitle = t('search.no-tutorials');
@@ -101,7 +101,7 @@ const SearchHits = connectStateResults(
     handleMouseLeave,
     selectedIndex,
     handleHits
-  }: searchHitsPropTypes) => {
+  }: SearchHitsProps) => {
     return isEmpty(searchState) || !searchState.query ? null : (
       <CustomHits
         handleHits={handleHits}

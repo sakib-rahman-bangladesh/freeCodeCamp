@@ -1,6 +1,6 @@
 ---
 id: 587d78a7367417b2b2512ae0
-title: Use animações CSS para alterar o estado de foco de um botão
+title: Usar animações CSS para alterar o estado de foco de um botão
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/cg4vZAa'
 forumTopicId: 301073
@@ -15,6 +15,9 @@ Aqui está um exemplo de alteração da largura de uma imagem ao passar o cursor
 
 ```html
 <style>
+  img {
+    width: 30px;
+  }
   img:hover {
     animation-name: width;
     animation-duration: 500ms;
@@ -27,7 +30,7 @@ Aqui está um exemplo de alteração da largura de uma imagem ao passar o cursor
   }
 </style>
 
-<img src="https://bit.ly/smallgooglelogo" alt="Google's Logo" />
+<img src="https://cdn.freecodecamp.org/curriculum/applied-visual-design/google-logo.png" alt="Google's Logo" />
 ```
 
 # --instructions--

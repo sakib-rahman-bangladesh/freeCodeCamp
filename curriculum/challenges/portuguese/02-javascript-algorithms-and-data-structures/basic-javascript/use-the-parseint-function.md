@@ -1,6 +1,6 @@
 ---
 id: 587d7b7e367417b2b2512b23
-title: Use a função parseInt
+title: Usar a função parseInt
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cm83LSW'
 forumTopicId: 301183
@@ -9,10 +9,10 @@ dashedName: use-the-parseint-function
 
 # --description--
 
-A função `parseInt()` analisa uma string e retorna um inteiro. Aqui está um exemplo:
+A função `parseInt()` analisa uma string e retorna um inteiro. Exemplo:
 
 ```js
-var a = parseInt("007");
+const a = parseInt("007");
 ```
 
 A função acima converte a string `007` para o inteiro `7`. Se o primeiro caractere na string não pode ser convertido em um número, então ele retorna `NaN`.

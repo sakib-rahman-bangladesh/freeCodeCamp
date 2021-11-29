@@ -1,6 +1,6 @@
 ---
 id: bd7993c9c69feddfaeb7bdef
-title: Multiplique Dois Decimais com JavaScript
+title: Multiplicar dois decimais com JavaScript
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/ce2GeHq'
 forumTopicId: 301173
@@ -11,7 +11,7 @@ dashedName: multiply-two-decimals-with-javascript
 
 Em JavaScript, você também pode realizar cálculos com números decimais, assim como com números inteiros.
 
-Vamos multiplicar dois decimais juntos para obter o produto deles.
+Vamos multiplicar dois decimais para obter o produto deles.
 
 # --instructions--
 
@@ -42,11 +42,11 @@ assert(/\*/.test(code));
 ## --seed-contents--
 
 ```js
-var product = 2.0 * 0.0;
+const product = 2.0 * 0.0;
 ```
 
 # --solutions--
 
 ```js
-var product = 2.0 * 2.5;
+const product = 2.0 * 2.5;
 ```

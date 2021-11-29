@@ -1,6 +1,6 @@
 ---
 id: 587d7db7367417b2b2512b9e
-title: Padrões de Fim de String
+title: Encontrar padrões ao final da string
 challengeType: 1
 forumTopicId: 301352
 dashedName: match-ending-string-patterns
@@ -34,7 +34,7 @@ Você deve usar o cifrão `$` na sua regex para buscar a string `caboose`.
 assert(lastRegex.source == 'caboose$');
 ```
 
-Sua regex não deve usar nenhuma flag.
+A regex não deve usar nenhuma flag.
 
 ```js
 assert(lastRegex.flags == '');
@@ -43,6 +43,7 @@ assert(lastRegex.flags == '');
 Você deve capturar `caboose` no fim da string `The last car on a train is the caboose`
 
 ```js
+lastRegex.lastIndex = 0;
 assert(lastRegex.test('The last car on a train is the caboose'));
 ```
 

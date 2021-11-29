@@ -1,6 +1,6 @@
 ---
 id: cf1111c1c11feddfaeb6bdef
-title: Divida Um Número por Outro com JavaScript
+title: Dividir um número por outro com JavaScript
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cqkbdAr'
 forumTopicId: 17566
@@ -16,7 +16,7 @@ JavaScript usa o símbolo `/` para divisão.
 **Exemplo**
 
 ```js
-myVar = 16 / 2;
+const myVar = 16 / 2;
 ```
 
 `myVar` agora possui o valor `8`.
@@ -49,11 +49,11 @@ assert(/\d+\s*\/\s*\d+/.test(code));
 ## --seed-contents--
 
 ```js
-var quotient = 66 / 0;
+const quotient = 66 / 0;
 ```
 
 # --solutions--
 
 ```js
-var quotient = 66 / 33;
+const quotient = 66 / 33;
 ```

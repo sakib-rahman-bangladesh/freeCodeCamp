@@ -1,12 +1,14 @@
+import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+
+import { SuperBlocks } from '../../../../../config/certification-settings';
 
 import CompletionModalBody from './completion-modal-body';
 
 const props = {
   block: 'basic-html-and-html5',
   completedPercent: Math.floor(Math.random() * 101),
-  superBlock: 'responsive-web-design'
+  superBlock: SuperBlocks.RespWebDesign
 };
 
 describe('<CompletionModalBody />', () => {
@@ -22,26 +24,22 @@ describe('<CompletionModalBody />', () => {
     });
 
     test('renders with 0% width initially', () => {
-      const { container } = render(<CompletionModalBody {...props} />);
-      expect(container.querySelector('.progress-bar-percent')).toHaveAttribute(
-        'style',
-        'width: 0%;'
-      );
+      render(<CompletionModalBody {...props} />);
+      expect(screen.getByTestId('fcc-progress-bar-percent')).toHaveStyle({
+        width: '0%'
+      });
     });
 
     test('has the correct width after animation', () => {
-      const { container } = render(<CompletionModalBody {...props} />);
+      render(<CompletionModalBody {...props} />);
 
-      fireEvent.animationEnd(
-        container.querySelector('.completion-success-icon') as HTMLElement
-      );
+      fireEvent.animationEnd(screen.getByTestId('fcc-completion-success-icon'));
 
       jest.runAllTimers();
 
-      expect(container.querySelector('.progress-bar-percent')).toHaveAttribute(
-        'style',
-        `width: ${props.completedPercent}%;`
-      );
+      expect(screen.getByTestId('fcc-progress-bar-percent')).toHaveStyle({
+        width: `${props.completedPercent}%`
+      });
     });
   });
 });

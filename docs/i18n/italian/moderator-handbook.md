@@ -18,7 +18,7 @@ freeCodeCamp è una comunità inclusiva ed è necessario lasciarla così.
 
 Abbiamo un unico codice di comportamento che governa la nostra intera comunità. Meno sono le regole, più facile sarà ricordarle. Puoi leggere queste regole e impegnarti a ricordarle [qui](https://code-of-conduct.freecodecamp.org).
 
-> [!NOTE] Come moderatore, ti aggiungeremo a uno o più team su GitHub, ai forum della community & ai server delle chat. Se ti manca l'accesso a una piattaforma che vorresti moderare, per favore [contatta un membro dello staff](/FAQ?id=additional-assistance).
+> [!NOTE] Come moderatore, ti aggiungeremo a uno o più team su GitHub, ai forum della community & ai server delle chat. Se ti manca l'accesso a una piattaforma che vorresti moderare, per favore [contatta un membro dello staff](FAQ.md#additional-assistance).
 
 ## Moderare GitHub
 
@@ -39,7 +39,7 @@ Puoi aiutarci ad organizzare e fare lo smistamento delle issue riportate applica
 
 Per favore, fai particolare attenzione alle etichette `"help wanted"` e `"first timers only"`. Queste devono essere aggiunte ai thread che pensi possano essere aperti a potenziali contributori per creare una pull request.
 
-Un'etichetta `"first timer only"` dovrebbe essere applicata per problemi banali (es. un refuso) e dovrebbe includere informazioni addizionali. Puoi usare questo [modello di risposta](/moderator-handbook?id=first-timer-only-issues) per lo smistamento.
+Un'etichetta `"first timer only"` dovrebbe essere applicata per problemi banali (es. un refuso) e dovrebbe includere informazioni addizionali. Puoi usare questo [modello di risposta](moderator-handbook.md#first-timer-only-issues) per lo smistamento.
 
 #### Chiudere issues e pull request stantii, obsoleti e inattivi
 
@@ -49,7 +49,7 @@ Un'etichetta `"first timer only"` dovrebbe essere applicata per problemi banali 
 
 - Se il contributore chiede ulteriore assistenza o anche del tempo, quanto sopra può essere rilassato e rivisitato dopo che è stata data una risposta. In ogni caso, i moderatori dovrebbero usare il loro buon senso per prendere una decisione sullo status in sospeso della PR.
 
-> [!TIP] Ti consigliamo di usare questa lista di [modelli di risposta](https://contribute.freecodecamp.org/#/moderator-handbook?id=reply-templates) mentre smisti le issue.
+> [!TIP] Ti consigliamo di usare questa lista di [modelli di risposta](moderator-handbook.md#reply-templates) mentre smisti le issue.
 
 ### Moderare le pull request
 
@@ -63,7 +63,7 @@ Le pull request (PR) sono il modo in cui i contributori sottopongono cambiamenti
 
    Puoi anche farne la revisione direttamente su GitHub e decidere se fare il merge. Dobbiamo fare un po' attenzione su questo perché milioni di persone incontreranno questo testo lavorando sul curriculum di freeCodeCamp. La pull request rende il testo più chiaro senza allungarlo troppo? Le modifiche sono rilevanti e non troppo pedanti? Ricorda che il nostro obbiettivo è che le sfide siano più chiare e più corte possibile. Non sono il luogo per dettagli incomprensibili. I contributori possono provare ad aggiungere link e risorse alle sfide.
 
-   Puoi chiudere le pull request non valide e rispondervi con questi [modelli di risposta](https://contribute.freecodecamp.org/#/moderator-handbook?id=closing-invalid-pull-requests).
+   Puoi chiudere le pull request non valide e rispondervi con questi [modelli di risposta](moderator-handbook.md#closing-invalid-pull-requests).
 
    Se la modifica va bene, assicurati di lasciare un'approvazione con un commento "LGTM". Una volta che una pull request riceve almeno due approvazioni (inclusa la tua) dai moderatori o dal dev-team, puoi procedere e farne il merge.
 
@@ -75,7 +75,7 @@ Le pull request (PR) sono il modo in cui i contributori sottopongono cambiamenti
 
    Alcuni contributori potrebbero provare ad aggiungere test addizionali per coprire casi limite pedanti. Dobbiamo fare attenzione a non rendere le sfide troppo complicate. Queste sfide e i loro test dovrebbero essere più semplici e intuitivi possibile. Ad eccezione delle sfide sugli algoritmi e della sezione di preparazione al colloquio di lavoro, gli studenti dovrebbero essere in grado di risolvere ogni sfida entro due minuti.
 
-   Puoi chiudere le pull request non valide e rispondervi con questi [modelli di risposta](https://contribute.freecodecamp.org/#/moderator-handbook?id=closing-invalid-pull-requests).
+   Puoi chiudere le pull request non valide e rispondervi con questi [modelli di risposta](moderator-handbook.md#closing-invalid-pull-requests).
 
    Se la modifica va bene, assicurati di lasciare un'approvazione con un commento "LGTM". Una volta che una pull request ha ricevuto almeno due approvazioni (inclusa la tua) dai moderatori o dal dev-team, puoi procedere e farne il merge.
 
@@ -111,7 +111,7 @@ A volte ci sarà un conflitto di merge.
 
 Ciò significa che un'altra pull request ha apportato una modifica alla stessa parte di quello stesso file. GitHub ha uno strumento per affrontare questi conflitti di unione direttamente su GitHub. Puoi provare ad affrontare questi conflitti. Usa il tuo miglior giudizio.
 
-Le modifiche della pull request saranno in alto e le modifiche del ramo Master saranno in basso. A volte ci saranno informazioni ridondanti che possono essere cancellate. Prima di finire, assicura di cancellare i simboli `<<<<<<`, `======`, e `>>>>>>` che Git aggiunge per indicare le aree in conflitto.
+Le modifiche della pull request saranno in alto e le modifiche del ramo main saranno in basso. A volte ci saranno informazioni ridondanti che possono essere cancellate. Prima di finire, assicura di cancellare i simboli `<<<<<<`, `======`, e `>>>>>>` che Git aggiunge per indicare le aree in conflitto.
 
 Se non sei sicuro, chiedi assistenza a uno degli altri moderatori o al team di sviluppo.
 
@@ -142,7 +142,7 @@ Spesso una pull request avrà richiesto uno sforzo minimo. Puoi capirlo immediat
 
 Ci sono anche situazioni in cui il contributore sta cercando di aggiungere un collegamento al proprio sito Web, includere una libreria che ha creato o apportare una modifica frivola che non aiuta nessuno tranne se stesso.
 
-Puoi chiudere le pull request non valide e rispondere con questi [modelli di risposta](https://contribute.freecodecamp.org/#/moderator-handbook?id=closing-invalid-pull-requests).
+Puoi chiudere le pull request non valide e rispondervi con questi [modelli di risposta](moderator-handbook.md#closing-invalid-pull-requests).
 
 #### Altre linee guida per i Moderatori su GitHub
 
@@ -174,7 +174,7 @@ I moderatori del forum possono cancellare i post degli utenti. Dovresti farlo so
 
 Al primo post di spam di un utente, mandagli un messaggio spiegando il problema e rimuovi il link o il post come appropriato. Lascia una nota sul profilo dell'utente spiegando le azioni che hai intrapreso. Se il problema persiste, allora impedisci tranquillamente all'utente di postare (usando l'opzione silenzia sul pannello Amministratore Utente). Manda all'utente un avvertimento con il Codice di Condotta. Spunta la casella nel messaggio privato che indica che il tuo messaggio è un "ammonimento formale."
 
-You can ask questions and report incidents in the [staff forum section](https://forum.freecodecamp.com/c/staff).
+Puoi fare domande e riportare incidenti sulla [sezione staff del forum](https://forum.freecodecamp.com/c/staff).
 
 ### Affrontare conversazioni off-topic
 
@@ -205,7 +205,7 @@ Grazie per la comprensione.
 
 Se vedi qualcosa che sembra violare il nostro [Codice di Condotta](https://code-of-conduct.freecodecamp.org/), dovresti eliminarlo immediatamente.
 
-Alcune volte le persone posteranno cose che credono essere divertenti. Non realizzano che ciò che hanno detto o condiviso potrebbe essere interpretato come offensivo. Dovresti eliminare quei post, ma non necessariamente bannare la persona. Si spera che l'utente capirà che ciò che ha postato era inappropriato perché il post è stato cancellato.
+Alcune volte le persone posteranno cose che credono essere divertenti. Non realizzano che ciò che hanno detto o condiviso potrebbe essere interpretato come offensivo. Dovresti eliminare quei post, ma non necessariamente bannare la persona. Si spera che l'utente capisca che ciò che ha postato era inappropriato e che quindi è stato cancellato.
 
 A meno che non sia un'offesa oltraggiosa che non può essere ragionevolmente attribuita a una differenza culturale o a un fraintendimento della lingua inglese. In tal caso, dovresti fortemente considerare di bloccare il membro dal gruppo Facebook.
 
@@ -388,7 +388,7 @@ Once you resolve these issues, we will be able to review your PR and merge it. �
 
 ---
 
-Feel free to reference the [contributing guidelines](https://contribute.freecodecamp.org/#/how-to-work-on-coding-challenges?id=testing-challenges) for instructions on running the CI build locally. ✅
+Feel free to reference the [contributing guidelines](how-to-work-on-coding-challenges.md#testing-challenges) for instructions on running the CI build locally. ✅
 ```
 
 ### Sincronizzare le fork
@@ -402,14 +402,14 @@ We would love to be able to merge your changes, but it looks like the branch is 
 
 To resolve this error, you will have to sync the latest changes from the `main` branch of the `freeCodeCamp/freeCodeCamp` repo.
 
-Using the command line, you can do this in three easy steps:
+Usando il terminale, puoi farlo in tre facili step:
 
 ```bash
 git remote add upstream git://github.com/freeCodeCamp/freeCodeCamp.git
 
 git fetch upstream
 
-git pull upstream master
+git pull upstream main
 ````
 
 Se stai usando una GUI, puoi semplicemente cercare il comando `Add a new remote...` e usare il link `git://github.com/freeCodeCamp/freeCodeCamp.git` visto sopra.
@@ -524,7 +524,7 @@ If you think we're wrong in closing this issue, please request for it to be reop
 ```markdown
 Thanks for opening this issue.
 
-This looks something that can be fixed by "first time" code contributors to this repository. Here are the files that you should be looking at to work on a fix:
+This looks like something that can be fixed by "first time" code contributors to this repository. Here are the files that you should be looking at to work on a fix:
 
 List of files:
 
@@ -534,7 +534,7 @@ List of files:
 
 Please make sure you read [our guidelines for contributing](https://contribute.freecodecamp.org/#/), we prioritize contributors following the instructions in our guides. Join us in [our chat room](https://chat.freecodecamp.org/channel/contributors) or [the forum](https://forum.freecodecamp.org/c/contributors/3) if you need help contributing, our moderators will guide you through this.
 
-Sometimes we may get more than one pull requests. We typically accept the most quality contribution followed by the one that is made first.
+Sometimes we may get more than one pull request. We typically accept the most quality contribution followed by the one that is made first.
 
 Happy contributing.
 ```

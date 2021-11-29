@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { Grid, Row, Col, Image, Button } from '@freecodecamp/react-bootstrap';
+import { isEmpty } from 'lodash-es';
+import React, { useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { createSelector } from 'reselect';
 
-import ShowProjectLinks from './show-project-links';
+import envData from '../../../config/env.json';
+import { langCodes } from '../../../config/i18n/all-langs';
 import FreeCodeCampLogo from '../assets/icons/FreeCodeCamp-logo';
 import DonateForm from '../components/Donation/DonateForm';
-import { Trans, useTranslation } from 'react-i18next';
 
+import { createFlashMessage } from '../components/Flash/redux';
+import { Loader, Spacer } from '../components/helpers';
+import RedirectHome from '../components/redirect-home';
 import {
   showCertSelector,
   showCertFetchStateSelector,
@@ -20,22 +25,18 @@ import {
   userByNameSelector,
   fetchProfileForUser
 } from '../redux';
+import { User } from '../redux/prop-types';
 import { certMap } from '../resources/cert-and-project-map';
-import { createFlashMessage } from '../components/Flash/redux';
-import standardErrorMessage from '../utils/standard-error-message';
+import certificateMissingMessage from '../utils/certificate-missing-message';
 import reallyWeirdErrorMessage from '../utils/really-weird-error-message';
-import { langCodes } from '../../../config/i18n/all-langs';
-import envData from '../../../config/env.json';
+import standardErrorMessage from '../utils/standard-error-message';
 
-import RedirectHome from '../components/redirect-home';
-import { Loader, Spacer } from '../components/helpers';
-import { isEmpty } from 'lodash-es';
-import { UserType } from '../redux/prop-types';
+import ShowProjectLinks from './show-project-links';
 
 const { clientLocale } = envData as { clientLocale: keyof typeof langCodes };
 
 const localeCode = langCodes[clientLocale];
-type CertType = {
+type Cert = {
   username: string;
   name: string;
   certName: string;
@@ -43,11 +44,11 @@ type CertType = {
   completionTime: number;
   date: number;
 };
-interface IShowCertificationProps {
-  cert: CertType;
+interface ShowCertificationProps {
+  cert: Cert;
   certDashedName: string;
   certSlug: string;
-  createFlashMessage: (payload: typeof standardErrorMessage) => void;
+  createFlashMessage: typeof createFlashMessage;
   executeGA: (payload: Record<string, unknown>) => void;
   fetchProfileForUser: (username: string) => void;
   fetchState: {
@@ -68,7 +69,7 @@ interface IShowCertificationProps {
     certSlug: string;
   }) => void;
   signedInUserName: string;
-  user: UserType;
+  user: User;
   userFetchState: {
     complete: boolean;
   };
@@ -77,11 +78,11 @@ interface IShowCertificationProps {
 }
 
 const requestedUserSelector = (state: unknown, { username = '' }) =>
-  userByNameSelector(username.toLowerCase())(state) as UserType;
+  userByNameSelector(username.toLowerCase())(state) as User;
 
 const validCertSlugs = certMap.map(cert => cert.certSlug);
 
-const mapStateToProps = (state: unknown, props: IShowCertificationProps) => {
+const mapStateToProps = (state: unknown, props: ShowCertificationProps) => {
   const isValidCert = validCertSlugs.some(slug => slug === props.certSlug);
   return createSelector(
     showCertSelector,
@@ -91,10 +92,10 @@ const mapStateToProps = (state: unknown, props: IShowCertificationProps) => {
     isDonatingSelector,
     requestedUserSelector,
     (
-      cert: CertType,
-      fetchState: IShowCertificationProps['fetchState'],
+      cert: Cert,
+      fetchState: ShowCertificationProps['fetchState'],
       signedInUserName: string,
-      userFetchState: IShowCertificationProps['userFetchState'],
+      userFetchState: ShowCertificationProps['userFetchState'],
       isDonating: boolean,
       user
     ) => ({
@@ -115,7 +116,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     dispatch
   );
 
-const ShowCertification = (props: IShowCertificationProps): JSX.Element => {
+const ShowCertification = (props: ShowCertificationProps): JSX.Element => {
   const { t } = useTranslation();
   const [isDonationSubmitted, setIsDonationSubmitted] = useState(false);
   const [isDonationDisplayed, setIsDonationDisplayed] = useState(false);
@@ -205,7 +206,7 @@ const ShowCertification = (props: IShowCertificationProps): JSX.Element => {
   } = props;
 
   if (!isValidCert) {
-    createFlashMessage(standardErrorMessage);
+    createFlashMessage(certificateMissingMessage);
     return <RedirectHome />;
   }
 
@@ -265,7 +266,7 @@ const ShowCertification = (props: IShowCertificationProps): JSX.Element => {
         </Row>
       )}
       <Row>
-        <Col md={8} mdOffset={2} xs={12}>
+        <Col lg={8} lgOffset={2} sm={10} smOffset={1} xs={12}>
           <DonateForm
             defaultTheme='default'
             handleProcessing={handleProcessing}

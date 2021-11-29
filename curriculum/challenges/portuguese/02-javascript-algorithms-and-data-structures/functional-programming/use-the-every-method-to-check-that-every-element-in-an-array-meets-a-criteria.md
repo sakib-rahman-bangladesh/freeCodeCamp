@@ -1,6 +1,6 @@
 ---
 id: 587d7dab367417b2b2512b6e
-title: Use o Método every para Checar Se Todos os Elementos em um Array Atendem a um Critério
+title: Usar o método every para checar se todos os elementos em um array atendem a um critério
 challengeType: 1
 forumTopicId: 301312
 dashedName: use-the-every-method-to-check-that-every-element-in-an-array-meets-a-criteria
@@ -13,7 +13,8 @@ O método `every` funciona verificando se *todos* os elementos de um array passa
 Por exemplo, o código a seguir verifica se todos os elementos no array `numbers` são menores que 10:
 
 ```js
-var numbers = [1, 5, 8, 0, 10, 11];
+const numbers = [1, 5, 8, 0, 10, 11];
+
 numbers.every(function(currentValue) {
   return currentValue < 10;
 });
@@ -62,6 +63,7 @@ function checkPositive(arr) {
 
   // Only change code above this line
 }
+
 checkPositive([1, 2, 3, -4, 5]);
 ```
 
@@ -69,9 +71,6 @@ checkPositive([1, 2, 3, -4, 5]);
 
 ```js
 function checkPositive(arr) {
-  // Only change code below this line
   return arr.every(num => num > 0);
-  // Only change code above this line
 }
-checkPositive([1, 2, 3, -4, 5]);
 ```

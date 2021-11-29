@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash-es';
 import React, { EventHandler, SyntheticEvent } from 'react';
 import { AutocompleteExposed, SearchState } from 'react-instantsearch-core';
 import {
@@ -5,18 +6,16 @@ import {
   connectStateResults,
   connectAutoComplete
 } from 'react-instantsearch-dom';
-import { isEmpty } from 'lodash-es';
 import EmptySearch from './empty-search';
 import NoResults from './no-results';
 
 import './search-page-hits.css';
 
-type allHitType = {
+type AllHitsProps = {
   handleClick?: EventHandler<SyntheticEvent>;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const AllHits: React.ComponentClass<AutocompleteExposed & allHitType, any> =
+const AllHits: React.ComponentClass<AutocompleteExposed & AllHitsProps> =
   connectAutoComplete(({ hits, currentRefinement }) => {
     const isHitsEmpty = !hits.length;
 

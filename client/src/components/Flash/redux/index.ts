@@ -1,41 +1,89 @@
-import { createAction, handleActions } from 'redux-actions';
 import { nanoid } from 'nanoid';
+import store from 'store';
+import { FlashState, State } from '../../../redux/types';
 
-import { createTypes } from '../../../utils/create-types';
-
-export const ns = 'flash';
+export const FlashApp = 'flash';
 
 const initialState = {
-  message: {}
+  message: {
+    id: '',
+    type: '',
+    message: ''
+  }
 };
-
-export const types = createTypes(
-  ['createFlashMessage', 'removeFlashMessage'],
-  ns
-);
 
 export const sagas = [];
 
-export const createFlashMessage = createAction(
-  types.createFlashMessage,
-  (msg: string[]) => ({ id: nanoid(), ...msg })
-);
-export const removeFlashMessage = createAction(types.removeFlashMessage);
+export const flashMessageSelector = (state: State): FlashState['message'] =>
+  state[FlashApp].message;
 
-// TODO: Once state is typed, add here, remove disable.
-// eslint-disable-next-line
-export const flashMessageSelector = (state: any): string => state[ns].message;
+// ACTION DEFINITIONS
 
-export const reducer = handleActions(
-  {
-    [types.createFlashMessage]: (state, { payload }) => ({
-      ...state,
-      message: payload
-    }),
-    [types.removeFlashMessage]: state => ({
-      ...state,
-      message: {}
-    })
-  },
-  initialState
-);
+enum FlashActionTypes {
+  CreateFlashMessage = 'createFlashMessage',
+  RemoveFlashMessage = 'removeFlashMessage'
+}
+
+export type FlashMessageArg = {
+  type: string;
+  message: string;
+  variables?: Record<string, unknown>;
+};
+
+export const createFlashMessage = (
+  flash: FlashMessageArg
+): ReducerPayload<FlashActionTypes.CreateFlashMessage> => {
+  const playSound = store.get('fcc-sound') as boolean | undefined;
+  if (playSound) {
+    void import('tone').then(tone => {
+      if (tone.context.state !== 'running') {
+        void tone.context.resume();
+      }
+      if (flash.message === 'flash.incomplete-steps') {
+        const player = new tone.Player(
+          'https://campfire-mode.freecodecamp.org/try-again.mp3'
+        ).toDestination();
+        player.autostart = playSound;
+      }
+      if (flash.message === 'flash.cert-claim-success') {
+        const player = new tone.Player(
+          'https://campfire-mode.freecodecamp.org/cert.mp3'
+        ).toDestination();
+        player.autostart = playSound;
+      }
+    });
+  }
+  return {
+    type: FlashActionTypes.CreateFlashMessage,
+    payload: { ...flash, id: nanoid() }
+  };
+};
+
+export const removeFlashMessage =
+  (): ReducerPayload<FlashActionTypes.RemoveFlashMessage> => ({
+    type: FlashActionTypes.RemoveFlashMessage
+  });
+
+// REDUCER
+type ReducerBase<T> = { type: T };
+type ReducerPayload<T extends FlashActionTypes> =
+  T extends FlashActionTypes.CreateFlashMessage
+    ? ReducerBase<T> & {
+        payload: FlashState['message'];
+      }
+    : ReducerBase<T>;
+
+// Does reducer return FlashState or AppState (whole app)?
+export const reducer = (
+  state: FlashState = initialState,
+  action: ReducerPayload<FlashActionTypes>
+): FlashState => {
+  switch (action.type) {
+    case FlashActionTypes.CreateFlashMessage:
+      return { ...state, message: action.payload };
+    case FlashActionTypes.RemoveFlashMessage:
+      return { ...state, message: initialState.message };
+    default:
+      return state;
+  }
+};

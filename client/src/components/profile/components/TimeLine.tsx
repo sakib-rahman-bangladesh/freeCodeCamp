@@ -1,11 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/unbound-method */
-import React, { Component, useMemo } from 'react';
-import { reverse, sortBy } from 'lodash-es';
 import {
   Button,
   Modal,
@@ -13,128 +6,109 @@ import {
   DropdownButton,
   MenuItem
 } from '@freecodecamp/react-bootstrap';
+import Loadable from '@loadable/component';
 import { useStaticQuery, graphql } from 'gatsby';
+import { reverse, sortBy } from 'lodash-es';
+import React, { useMemo, useState } from 'react';
 import { TFunction, withTranslation } from 'react-i18next';
 
-import './timeline.css';
-import TimelinePagination from './TimelinePagination';
-import { FullWidthRow, Link } from '../../helpers';
-import Loadable from '@loadable/component';
-
+import envData from '../../../../../config/env.json';
+import { langCodes } from '../../../../../config/i18n/all-langs';
 import {
   getCertIds,
   getPathFromID,
   getTitleFromId
 } from '../../../../../utils';
-
-import { maybeUrlRE } from '../../../utils';
 import CertificationIcon from '../../../assets/icons/certification-icon';
+import { ChallengeFiles, CompletedChallenge } from '../../../redux/prop-types';
+import { maybeUrlRE } from '../../../utils';
+import { FullWidthRow, Link } from '../../helpers';
+import TimelinePagination from './timeline-pagination';
 
-import { langCodes } from '../../../../../config/i18n/all-langs';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import envData from '../../../../../config/env.json';
+import './timeline.css';
 
 const SolutionViewer = Loadable(
-  () =>
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    import('../../SolutionViewer/SolutionViewer')
+  () => import('../../SolutionViewer/SolutionViewer')
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const { clientLocale } = envData;
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/ban-ts-comment
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
+const { clientLocale } = envData as { clientLocale: keyof typeof langCodes };
 const localeCode = langCodes[clientLocale];
 
 // Items per page in timeline.
 const ITEMS_PER_PAGE = 15;
 
-interface ICompletedMap {
-  id: string;
-  completedDate: number;
-  challengeType: number;
-  solution: string;
-  files: IFile[];
-  githubLink: string;
-}
-
-interface ITimelineProps {
-  completedMap: ICompletedMap[];
-  t: TFunction<'translation'>;
+interface TimelineProps {
+  completedMap: CompletedChallenge[];
+  t: TFunction;
   username: string;
 }
 
-interface IFile {
-  ext: string;
-  contents: string;
-}
-
-interface ISortedTimeline {
-  id: string;
-  completedDate: number;
-  files: IFile[];
-  githubLink: string;
-  solution: string;
-}
-
-interface ITimelineInnerProps extends ITimelineProps {
+interface TimelineInnerProps extends TimelineProps {
   idToNameMap: Map<string, string>;
-  sortedTimeline: ISortedTimeline[];
+  sortedTimeline: CompletedChallenge[];
   totalPages: number;
 }
 
-interface ITimeLineInnerState {
-  solutionToView: string | null;
-  solutionOpen: boolean;
-  pageNo: number;
-  solution: string | null;
-  files: IFile[] | null;
-}
+function TimelineInner({
+  idToNameMap,
+  sortedTimeline,
+  totalPages,
 
-class TimelineInner extends Component<
-  ITimelineInnerProps,
-  ITimeLineInnerState
-> {
-  constructor(props: ITimelineInnerProps) {
-    super(props);
+  completedMap,
+  t,
+  username
+}: TimelineInnerProps) {
+  const [solutionToView, setSolutionToView] = useState<string | null>(null);
+  const [solutionOpen, setSolutionOpen] = useState(false);
+  const [pageNo, setPageNo] = useState(1);
+  const [solution, setSolution] = useState<string | null>(null);
+  const [challengeFiles, setChallengeFiles] = useState<ChallengeFiles>(null);
 
-    this.state = {
-      solutionToView: null,
-      solutionOpen: false,
-      pageNo: 1,
-      solution: null,
-      files: null
-    };
-
-    this.closeSolution = this.closeSolution.bind(this);
-    this.renderCompletion = this.renderCompletion.bind(this);
-    this.viewSolution = this.viewSolution.bind(this);
-    this.firstPage = this.firstPage.bind(this);
-    this.prevPage = this.prevPage.bind(this);
-    this.nextPage = this.nextPage.bind(this);
-    this.lastPage = this.lastPage.bind(this);
-    this.renderViewButton = this.renderViewButton.bind(this);
+  function viewSolution(
+    id: string,
+    solution_: string | undefined | null,
+    challengeFiles_: ChallengeFiles
+  ): void {
+    setSolutionToView(id);
+    setSolutionOpen(true);
+    setSolution(solution_ ?? '');
+    setChallengeFiles(challengeFiles_);
   }
 
-  renderViewButton(
+  function closeSolution(): void {
+    setSolutionToView(null);
+    setSolutionOpen(false);
+    setSolution(null);
+    setChallengeFiles(null);
+  }
+
+  function firstPage(): void {
+    setPageNo(1);
+  }
+  function nextPage(): void {
+    setPageNo(prev => prev + 1);
+  }
+  function prevPage(): void {
+    setPageNo(prev => prev - 1);
+  }
+  function lastPage(): void {
+    setPageNo(totalPages);
+  }
+
+  function renderViewButton(
     id: string,
-    files: IFile[],
-    githubLink: string,
-    solution: string
+    challengeFiles: ChallengeFiles,
+    githubLink?: string,
+    solution?: string | null
   ): React.ReactNode {
-    const { t } = this.props;
-    if (files && files.length) {
+    if (challengeFiles?.length) {
       return (
         <Button
           block={true}
           bsStyle='primary'
           className='btn-invert'
           id={`btn-for-${id}`}
-          onClick={() => this.viewSolution(id, solution, files)}
+          onClick={() => viewSolution(id, solution, challengeFiles)}
         >
           {t('buttons.show-code')}
         </Button>
@@ -168,7 +142,7 @@ class TimelineInner extends Component<
           </DropdownButton>
         </div>
       );
-    } else if (maybeUrlRE.test(solution)) {
+    } else if (solution && maybeUrlRE.test(solution)) {
       return (
         <Button
           block={true}
@@ -187,12 +161,10 @@ class TimelineInner extends Component<
     }
   }
 
-  renderCompletion(completed: ISortedTimeline): JSX.Element {
-    const { idToNameMap, username } = this.props;
-    const { id, files, githubLink, solution } = completed;
+  function renderCompletion(completed: CompletedChallenge): JSX.Element {
+    const { id, challengeFiles, githubLink, solution } = completed;
     const completedDate = new Date(completed.completedDate);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error idToNameMap is not a <string, string> Map...
     const { challengeTitle, challengePath, certPath } = idToNameMap.get(id);
     return (
       <tr className='timeline-row' key={id}>
@@ -200,17 +172,16 @@ class TimelineInner extends Component<
           {certPath ? (
             <Link
               className='timeline-cert-link'
-              external={true}
-              to={`certification/${username}/${certPath}`}
+              to={`/certification/${username}/${certPath as string}`}
             >
               {challengeTitle}
               <CertificationIcon />
             </Link>
           ) : (
-            <Link to={challengePath}>{challengeTitle}</Link>
+            <Link to={challengePath as string}>{challengeTitle}</Link>
           )}
         </td>
-        <td>{this.renderViewButton(id, files, githubLink, solution)}</td>
+        <td>{renderViewButton(id, challengeFiles, githubLink, solution)}</td>
         <td className='text-center'>
           <time dateTime={completedDate.toISOString()}>
             {completedDate.toLocaleString([localeCode, 'en-US'], {
@@ -223,125 +194,73 @@ class TimelineInner extends Component<
       </tr>
     );
   }
-  viewSolution(id: string, solution: string, files: IFile[]): void {
-    this.setState(state => ({
-      ...state,
-      solutionToView: id,
-      solutionOpen: true,
-      solution,
-      files
-    }));
-  }
 
-  closeSolution() {
-    this.setState(state => ({
-      ...state,
-      solutionToView: null,
-      solutionOpen: false,
-      solution: null,
-      files: null
-    }));
-  }
+  const id = solutionToView;
+  const startIndex = (pageNo - 1) * ITEMS_PER_PAGE;
+  const endIndex = pageNo * ITEMS_PER_PAGE;
 
-  firstPage() {
-    this.setState({
-      pageNo: 1
-    });
-  }
-  nextPage() {
-    this.setState(state => ({
-      pageNo: state.pageNo + 1
-    }));
-  }
-
-  prevPage() {
-    this.setState(state => ({
-      pageNo: state.pageNo - 1
-    }));
-  }
-  lastPage() {
-    this.setState((_, props) => ({
-      pageNo: props.totalPages
-    }));
-  }
-  render() {
-    const {
-      completedMap,
-      idToNameMap,
-      username,
-      sortedTimeline,
-      t,
-      totalPages = 1
-    } = this.props;
-    const { solutionToView: id, solutionOpen, pageNo = 1 } = this.state;
-    const startIndex = (pageNo - 1) * ITEMS_PER_PAGE;
-    const endIndex = pageNo * ITEMS_PER_PAGE;
-
-    return (
-      <FullWidthRow>
-        <h2 className='text-center'>{t('profile.timeline')}</h2>
-        {completedMap.length === 0 ? (
-          <p className='text-center'>
-            {t('profile.none-completed')}&nbsp;
-            <Link to='/learn'>{t('profile.get-started')}</Link>
-          </p>
-        ) : (
-          <Table condensed={true} striped={true}>
-            <thead>
-              <tr>
-                <th>{t('profile.challenge')}</th>
-                <th>{t('settings.labels.solution')}</th>
-                <th className='text-center'>{t('profile.completed')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedTimeline
-                .slice(startIndex, endIndex)
-                .map(this.renderCompletion)}
-            </tbody>
-          </Table>
-        )}
-        {id && (
-          <Modal
-            aria-labelledby='contained-modal-title'
-            onHide={this.closeSolution}
-            show={solutionOpen}
-          >
-            <Modal.Header closeButton={true}>
-              <Modal.Title id='contained-modal-title'>
-                {`${username}'s Solution to ${
-                  // @ts-expect-error Need better TypeDef for this
-                  idToNameMap.get(id).challengeTitle
-                }`}
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <SolutionViewer
-                // @ts-expect-error Need Better TypeDef
-                files={this.state.files}
-                solution={this.state.solution}
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.closeSolution}>{t('buttons.close')}</Button>
-            </Modal.Footer>
-          </Modal>
-        )}
-        {totalPages > 1 && (
-          <TimelinePagination
-            firstPage={this.firstPage}
-            lastPage={this.lastPage}
-            nextPage={this.nextPage}
-            pageNo={pageNo}
-            prevPage={this.prevPage}
-            totalPages={totalPages}
-          />
-        )}
-      </FullWidthRow>
-    );
-  }
+  return (
+    <FullWidthRow>
+      <h2 className='text-center'>{t('profile.timeline')}</h2>
+      {completedMap.length === 0 ? (
+        <p className='text-center'>
+          {t('profile.none-completed')}&nbsp;
+          <Link to='/learn'>{t('profile.get-started')}</Link>
+        </p>
+      ) : (
+        <Table condensed={true} striped={true}>
+          <thead>
+            <tr>
+              <th>{t('profile.challenge')}</th>
+              <th>{t('settings.labels.solution')}</th>
+              <th className='text-center'>{t('profile.completed')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedTimeline.slice(startIndex, endIndex).map(renderCompletion)}
+          </tbody>
+        </Table>
+      )}
+      {id && (
+        <Modal
+          aria-labelledby='contained-modal-title'
+          onHide={closeSolution}
+          show={solutionOpen}
+        >
+          <Modal.Header closeButton={true}>
+            <Modal.Title id='contained-modal-title'>
+              {`${username}'s Solution to ${
+                // @ts-expect-error Need better TypeDef for this
+                idToNameMap.get(id).challengeTitle as string
+              }`}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <SolutionViewer
+              challengeFiles={challengeFiles}
+              solution={solution ?? ''}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={closeSolution}>{t('buttons.close')}</Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+      {totalPages > 1 && (
+        <TimelinePagination
+          firstPage={firstPage}
+          lastPage={lastPage}
+          nextPage={nextPage}
+          pageNo={pageNo}
+          prevPage={prevPage}
+          totalPages={totalPages}
+        />
+      )}
+    </FullWidthRow>
+  );
 }
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call*/
 function useIdToNameMap(): Map<string, string> {
   const {
     allChallengeNode: { edges }
@@ -370,22 +289,22 @@ function useIdToNameMap(): Map<string, string> {
   edges.forEach(
     ({
       node: {
-        // @ts-ignore
+        // @ts-expect-error Graphql needs typing
         id,
-        // @ts-ignore
+        // @ts-expect-error Graphql needs typing
         title,
-        // @ts-ignore
+        // @ts-expect-error Graphql needs typing
         fields: { slug }
       }
     }) => {
       idToNameMap.set(id, { challengeTitle: title, challengePath: slug });
     }
   );
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return idToNameMap;
+  /* eslint-enable */
 }
 
-const Timeline = (props: ITimelineProps): JSX.Element => {
+const Timeline = (props: TimelineProps): JSX.Element => {
   const idToNameMap = useIdToNameMap();
   const { completedMap } = props;
   // Get the sorted timeline along with total page count.

@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244c0
-title: Escopo Global vs Local em Funções
+title: Diferenciar escopo global e local em funções
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/c2QwKH2'
 forumTopicId: 18194
@@ -9,14 +9,15 @@ dashedName: global-vs--local-scope-in-functions
 
 # --description--
 
-É possível ter ambas variáveis <dfn>local</dfn> e <dfn>global</dfn> com o mesmo nome. Quando você faz isso, a variável local tem precedência sobre a variável global.
+É possível ter as variáveis <dfn>local</dfn> e <dfn>global</dfn> com o mesmo nome. Quando você faz isso, a variável local tem precedência sobre a variável global.
 
 Neste exemplo:
 
 ```js
-var someVar = "Hat";
+const someVar = "Hat";
+
 function myFun() {
-  var someVar = "Head";
+  const someVar = "Head";
   return someVar;
 }
 ```
@@ -53,12 +54,10 @@ assert(/return outerWear/.test(code));
 
 ```js
 // Setup
-var outerWear = "T-Shirt";
+const outerWear = "T-Shirt";
 
 function myOutfit() {
   // Only change code below this line
-
-
 
   // Only change code above this line
   return outerWear;
@@ -70,9 +69,9 @@ myOutfit();
 # --solutions--
 
 ```js
-var outerWear = "T-Shirt";
+const outerWear = "T-Shirt";
 function myOutfit() {
-  var outerWear = "sweater";
+  const outerWear = "sweater";
   return outerWear;
 }
 ```

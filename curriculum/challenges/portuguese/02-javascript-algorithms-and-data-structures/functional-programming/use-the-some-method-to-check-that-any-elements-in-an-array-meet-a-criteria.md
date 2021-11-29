@@ -1,6 +1,6 @@
 ---
 id: 587d7dab367417b2b2512b6f
-title: Use o Método some para Checar Se Pelo Menos Um Elemento em um Array Atende a um Critério
+title: Usar o método some para checar se pelo menos um elemento em um array atende a um critério
 challengeType: 1
 forumTopicId: 301314
 dashedName: use-the-some-method-to-check-that-any-elements-in-an-array-meet-a-criteria
@@ -13,7 +13,8 @@ O método `some` funciona verificando se *pelo menos um* dos elementos de um arr
 Por exemplo, o código a seguir verifica se qualquer elemento no array `numbers` é menor que 10:
 
 ```js
-var numbers = [10, 50, 8, 220, 110, 11];
+const numbers = [10, 50, 8, 220, 110, 11];
+
 numbers.some(function(currentValue) {
   return currentValue < 10;
 });
@@ -62,6 +63,7 @@ function checkPositive(arr) {
 
   // Only change code above this line
 }
+
 checkPositive([1, 2, 3, -4, 5]);
 ```
 
@@ -69,9 +71,6 @@ checkPositive([1, 2, 3, -4, 5]);
 
 ```js
 function checkPositive(arr) {
-  // Only change code below this line
   return arr.some(elem => elem > 0);
-  // Only change code above this line
 }
-checkPositive([1, 2, 3, -4, 5]);
 ```

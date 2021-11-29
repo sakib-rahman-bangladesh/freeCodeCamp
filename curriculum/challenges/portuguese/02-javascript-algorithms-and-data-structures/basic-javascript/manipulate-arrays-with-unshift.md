@@ -1,6 +1,6 @@
 ---
 id: 56bbb991ad1ed5201cd392ce
-title: Manipule Arrays Com unshift()
+title: Manipular arrays com unshift()
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/ckNDESv'
 forumTopicId: 18239
@@ -9,14 +9,14 @@ dashedName: manipulate-arrays-with-unshift
 
 # --description--
 
-Não só você pode `remover` elementos do início de um array, como você também pode `adicionar (unshift)` elementos ao início de um array i.e. adiciona elementos na frente do array.
+Você pode não apenas usar `shift` para remover elementos do início de um array, como também pode usar `unshift` para adicionar elementos ao início de um array, ou seja, adicionar elementos na posição inicial do array.
 
-`.unshift()` funciona exatamente como `.push()`, mas ao invés de adicionar o elemento ao final do array, `unshift` adiciona o elemento no início do array.
+`.unshift()` funciona exatamente como `.push()`, mas, ao invés de adicionar o elemento ao final do array, `unshift()` adiciona o elemento no início do array.
 
 Exemplo:
 
 ```js
-var ourArray = ["Stimpson", "J", "cat"];
+const ourArray = ["Stimpson", "J", "cat"];
 ourArray.shift();
 ourArray.unshift("Happy");
 ```
@@ -25,7 +25,7 @@ Após o `shift`, `ourArray` teria o valor `["J","cat"]`. Após o `unshift`, `our
 
 # --instructions--
 
-Adicione `["Paul",35]` ao início da variável `myArray` usando `unshift()`.
+Adicione `["Paul", 35]` ao início da variável `myArray` usando `unshift()`.
 
 # --hints--
 
@@ -63,16 +63,17 @@ assert(
 
 ```js
 // Setup
-var myArray = [["John", 23], ["dog", 3]];
+const myArray = [["John", 23], ["dog", 3]];
 myArray.shift();
 
 // Only change code below this line
+
 ```
 
 # --solutions--
 
 ```js
-var myArray = [["John", 23], ["dog", 3]];
+const myArray = [["John", 23], ["dog", 3]];
 myArray.shift();
 myArray.unshift(["Paul", 35]);
 ```

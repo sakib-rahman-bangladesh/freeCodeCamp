@@ -1,8 +1,12 @@
 ---
 id: 5e8f2f13c4cdbe86b5c72da3
-title: Reinforcement Learning With Q-Learning
+title: Apprendimento per rinforzo con Q-Learning
 challengeType: 11
 videoId: Cf7DSU0gVb4
+bilibiliIds:
+  aid: 463025802
+  bvid: BV1iL411x7L6
+  cid: 409138811
 dashedName: reinforcement-learning-with-q-learning
 ---
 
@@ -10,19 +14,19 @@ dashedName: reinforcement-learning-with-q-learning
 
 ## --text--
 
-The key components of reinforcement learning are...
+Le componenti chiave dell'apprendimento per rinforzo sono...
 
 ## --answers--
 
-environment, representative, state, reaction, and reward.
+ambiente, rappresentazione, stato, reazione e ricompensa.
 
 ---
 
-environment, agent, state, action, and reward.
+ambiente, agente, stato, azione e ricompensa.
 
 ---
 
-habitat, agent, state, action, and punishment.
+habitat, agente, stato, azione e punizione.
 
 ## --video-solution--
 

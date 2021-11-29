@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244d3
-title: Comparação com o Operador de Desigualdade Estrito
+title: Comparar com o operador de desigualdade estrita
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cKekkUy'
 forumTopicId: 16791
@@ -9,7 +9,7 @@ dashedName: comparison-with-the-strict-inequality-operator
 
 # --description--
 
-O operador de desigualdade estrito (`!=`) é o oposto lógico do operador de igualdade estrito. Significa que "não é estritamente igual" e retorna `false` onde a igualdade estrita retornaria `true` e *vice-versa*. O operador de desigualdade estrita não converterá tipos de dados.
+O operador de desigualdade estrito (`!==`) é o oposto lógico do operador de igualdade estrito. Significa que "não é estritamente igual" e retorna `false` onde a igualdade estrita retornaria `true` e *vice-versa*. O operador de desigualdade estrita não converterá tipos de dados.
 
 **Exemplos**
 
@@ -23,7 +23,7 @@ Em ordem, essas expressões seriam iguais à `false`, `true` e `true`.
 
 # --instructions--
 
-Adicione o operador de desigualdade estrito ao comando `if` para que a função retorne a string `Not Equal` quando `val` não é estritamente igual a `17`
+Adicione o operador de desigualdade estrita ao comando `if` para que a função retorne a string `Not Equal` quando `val` não é estritamente igual a `17`
 
 # --hints--
 

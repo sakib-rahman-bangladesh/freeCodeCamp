@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244b9
-title: Construindo Strings com Variáveis
+title: Criar strings com variáveis
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cqk8rf4'
 forumTopicId: 16805
@@ -9,13 +9,13 @@ dashedName: constructing-strings-with-variables
 
 # --description--
 
-Às vezes você precisará construir uma string, no estilo [Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs). Usando o operador de concatenação (`+`), você pode inserir uma ou mais variáveis em uma string que você está construindo.
+Às vezes, você precisará criar uma string, no estilo [Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs). Usando o operador de concatenação (`+`), você pode inserir uma ou mais variáveis em uma string que você está criando.
 
 Exemplo:
 
 ```js
-var ourName = "freeCodeCamp";
-var ourStr = "Hello, our name is " + ourName + ", how are you?";
+const ourName = "freeCodeCamp";
+const ourStr = "Hello, our name is " + ourName + ", how are you?";
 ```
 
 `ourStr` teria o valor da string `Hello, our name is freeCodeCamp, how are you?`.
@@ -32,7 +32,7 @@ Defina `myName` para uma string igual ao seu nome e construa `myStr` com `myName
 assert(typeof myName !== 'undefined' && myName.length > 2);
 ```
 
-Você deve usar dois operadores `+` para construir `myStr` com `myName` dentro dele.
+Você deve usar dois operadores `+` para criar `myStr` com `myName` dentro dela.
 
 ```js
 assert(code.match(/["']\s*\+\s*myName\s*\+\s*["']/g).length > 0);
@@ -63,13 +63,13 @@ assert(code.match(/["']\s*\+\s*myName\s*\+\s*["']/g).length > 0);
 
 ```js
 // Only change code below this line
-var myName;
-var myStr;
+const myName = "";
+const myStr = "";
 ```
 
 # --solutions--
 
 ```js
-var myName = "Bob";
-var myStr = "My name is " + myName + " and I am well!";
+const myName = "Bob";
+const myStr = "My name is " + myName + " and I am well!";
 ```

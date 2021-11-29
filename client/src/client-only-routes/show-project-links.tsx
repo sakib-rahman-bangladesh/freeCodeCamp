@@ -1,41 +1,38 @@
+import { find, first } from 'lodash-es';
 import React, { useState } from 'react';
 import '../components/layouts/project-links.css';
-import { maybeUrlRE } from '../utils';
+import { Trans, useTranslation } from 'react-i18next';
+import ProjectModal from '../components/SolutionViewer/ProjectModal';
 import { Spacer, Link } from '../components/helpers';
+import { ChallengeFiles, CompletedChallenge, User } from '../redux/prop-types';
 import {
   projectMap,
   legacyProjectMap
 } from '../resources/cert-and-project-map';
-import ProjectModal from '../components/SolutionViewer/ProjectModal';
-import { find, first } from 'lodash-es';
-import { Trans, useTranslation } from 'react-i18next';
-import {
-  ChallengeFileType,
-  CompletedChallenge,
-  UserType
-} from '../redux/prop-types';
 
-interface IShowProjectLinksProps {
+import { maybeUrlRE } from '../utils';
+
+interface ShowProjectLinksProps {
   certName: string;
   name: string;
-  user: UserType;
+  user: User;
 }
 
-type SolutionStateType = {
+type SolutionState = {
   projectTitle: string;
-  files?: ChallengeFileType[] | null;
+  challengeFiles: ChallengeFiles;
   solution: CompletedChallenge['solution'];
   isOpen: boolean;
 };
 
-const initSolutionState: SolutionStateType = {
+const initSolutionState: SolutionState = {
   projectTitle: '',
-  files: null,
-  solution: null,
+  challengeFiles: null,
+  solution: '',
   isOpen: false
 };
 
-const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
+const ShowProjectLinks = (props: ShowProjectLinksProps): JSX.Element => {
   const [solutionState, setSolutionState] = useState(initSolutionState);
 
   const handleSolutionModalHide = () => setSolutionState(initSolutionState);
@@ -55,16 +52,16 @@ const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
       return null;
     }
 
-    const { solution, githubLink, files } = completedProject;
+    const { solution, githubLink, challengeFiles } = completedProject;
     const onClickHandler = () =>
       setSolutionState({
         projectTitle,
-        files,
+        challengeFiles,
         solution,
         isOpen: true
       });
 
-    if (files) {
+    if (challengeFiles?.length) {
       return (
         <button
           className='project-link-button-override'
@@ -100,7 +97,11 @@ const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
       );
     }
     return (
-      <button className='project-link-button-override' onClick={onClickHandler}>
+      <button
+        className='project-link-button-override'
+        data-cy={`${projectTitle} solution`}
+        onClick={onClickHandler}
+      >
         {t('certification.project.solution')}
       </button>
     );
@@ -111,9 +112,9 @@ const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
       const legacyCerts = [
         { title: 'Responsive Web Design' },
         { title: 'JavaScript Algorithms and Data Structures' },
-        { title: 'Front End Libraries' },
+        { title: 'Front End Development Libraries' },
         { title: 'Data Visualization' },
-        { title: 'APIs and Microservices' },
+        { title: 'Back End Development and APIs' },
         { title: 'Legacy Information Security and Quality Assurance' }
       ];
       return legacyCerts.map((cert, ind) => {
@@ -151,10 +152,10 @@ const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
         </li>
       )
     );
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    /* eslint-disable @typescript-eslint/no-unsafe-return */
-    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment */
+    /* eslint-enable @typescript-eslint/no-unsafe-call */
+    /* eslint-enable @typescript-eslint/no-unsafe-return */
+    /* eslint-enable @typescript-eslint/no-unsafe-member-access */
   };
 
   const {
@@ -162,7 +163,7 @@ const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
     name,
     user: { username }
   } = props;
-  const { files, isOpen, projectTitle, solution } = solutionState;
+  const { challengeFiles, isOpen, projectTitle, solution } = solutionState;
   return (
     <div>
       {t(
@@ -176,11 +177,13 @@ const ShowProjectLinks = (props: IShowProjectLinksProps): JSX.Element => {
       <Spacer />
       {isOpen ? (
         <ProjectModal
-          files={files}
+          challengeFiles={challengeFiles}
           handleSolutionModalHide={handleSolutionModalHide}
           isOpen={isOpen}
           projectTitle={projectTitle}
-          solution={solution}
+          // 'solution' is theoretically never 'null', if it a JsAlgoData cert
+          // which is the only time we use the modal
+          solution={solution as undefined | string}
         />
       ) : null}
       <Trans i18nKey='certification.project.footnote'>

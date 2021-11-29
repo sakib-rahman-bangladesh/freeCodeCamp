@@ -1,6 +1,6 @@
 ---
 id: 587d7da9367417b2b2512b6a
-title: Retorne um Array Ordenado Sem Modificar o Array Original
+title: Retornar um array ordenado sem modificar o array original
 challengeType: 1
 forumTopicId: 301237
 dashedName: return-a-sorted-array-without-changing-the-original-array
@@ -68,24 +68,23 @@ assert(JSON.stringify(nonMutatingSort([140000, 104, 99])) ===
 ## --seed-contents--
 
 ```js
-var globalArray = [5, 6, 3, 2, 9];
+const globalArray = [5, 6, 3, 2, 9];
+
 function nonMutatingSort(arr) {
   // Only change code below this line
 
 
   // Only change code above this line
 }
+
 nonMutatingSort(globalArray);
 ```
 
 # --solutions--
 
 ```js
-var globalArray = [5, 6, 3, 2, 9];
+const globalArray = [5, 6, 3, 2, 9];
 function nonMutatingSort(arr) {
-  // Only change code below this line
   return [].concat(arr).sort((a,b) => a-b);
-  // Only change code above this line
 }
-nonMutatingSort(globalArray);
 ```

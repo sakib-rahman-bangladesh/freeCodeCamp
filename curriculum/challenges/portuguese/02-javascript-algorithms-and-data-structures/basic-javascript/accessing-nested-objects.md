@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244cc
-title: Acessando Objetos Aninhados
+title: Acessar objetos aninhados
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cRnRnfa'
 forumTopicId: 16161
@@ -9,12 +9,12 @@ dashedName: accessing-nested-objects
 
 # --description--
 
-As sub propriedades de objetos podem ser acessadas ao encadear a notação de ponto e de colchetes.
+As subpropriedades de objetos podem ser acessadas ao encadear a notação de ponto e de colchetes.
 
 Aqui está um objeto aninhado:
 
 ```js
-var ourStorage = {
+const ourStorage = {
   "desk": {
     "drawer": "stapler"
   },
@@ -26,6 +26,7 @@ var ourStorage = {
     "bottom drawer": "soda"
   }
 };
+
 ourStorage.cabinet["top drawer"].folder2;
 ourStorage.desk.drawer;
 ```
@@ -44,7 +45,7 @@ Acesse o objeto `myStorage` e atribua o conteúdo da propriedade `glove box` par
 assert(gloveBoxContents === 'maps');
 ```
 
-Seu código deve usar notação de ponto e de colchetes para acessar `myStorage`.
+O código deve usar notação de ponto e de colchetes para acessar `myStorage`.
 
 ```js
 assert(/=\s*myStorage\.car\.inside\[\s*("|')glove box\1\s*\]/g.test(code));
@@ -66,7 +67,7 @@ assert(/=\s*myStorage\.car\.inside\[\s*("|')glove box\1\s*\]/g.test(code));
 ## --seed-contents--
 
 ```js
-var myStorage = {
+const myStorage = {
   "car": {
     "inside": {
       "glove box": "maps",
@@ -78,13 +79,13 @@ var myStorage = {
   }
 };
 
-var gloveBoxContents = undefined;
+const gloveBoxContents = undefined;
 ```
 
 # --solutions--
 
 ```js
-var myStorage = {
+const myStorage = {
   "car":{
     "inside":{
       "glove box":"maps",
@@ -95,5 +96,5 @@ var myStorage = {
     }
   }
 };
-var gloveBoxContents = myStorage.car.inside["glove box"];
+const gloveBoxContents = myStorage.car.inside["glove box"];
 ```

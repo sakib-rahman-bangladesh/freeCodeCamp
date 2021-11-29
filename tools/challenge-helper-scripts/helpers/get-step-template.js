@@ -4,7 +4,7 @@ const { insertErms } = require('./insert-erms');
 function getCodeBlock(label, content) {
   return `\`\`\`${label}
 ${typeof content !== 'undefined' ? content : ''}
-\`\`\``;
+\`\`\`\n`;
 }
 
 // Builds a section
@@ -27,7 +27,10 @@ function getStepTemplate({
 }) {
   const seedTexts = Object.values(challengeSeeds)
     .map(({ contents, ext, editableRegionBoundaries }) => {
-      const fullContents = insertErms(contents, editableRegionBoundaries);
+      let fullContents = contents;
+      if (editableRegionBoundaries.length >= 2) {
+        fullContents = insertErms(contents, editableRegionBoundaries);
+      }
       return getCodeBlock(ext, fullContents);
     })
     .join('\n');
@@ -55,9 +58,9 @@ function getStepTemplate({
   return (
     `---
 id: ${challengeId}
-title: Part ${stepNum}
+title: Step ${stepNum}
 challengeType: 0
-dashedName: part-${stepNum}
+dashedName: step-${stepNum}
 ---
 
 # --description--
@@ -69,7 +72,6 @@ ${stepDescription}
 Test 1
 
 ${getCodeBlock('js')}
-
 # --seed--` +
     seedChallengeSection +
     seedHeadSection +

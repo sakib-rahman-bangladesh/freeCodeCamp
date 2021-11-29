@@ -1,6 +1,6 @@
 ---
 id: bad87fee1348bd9aedf08806
-title: Altere o Tamanho da Fonte de um Elemento
+title: Alterar o tamanho da fonte de um elemento
 challengeType: 0
 videoUrl: 'https://scrimba.com/c/c3bvDc8'
 forumTopicId: 16777
@@ -44,7 +44,7 @@ assert(code.match(/p\s*{\s*font-size\s*:\s*16\s*px\s*;\s*}/i));
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
   <div>
     <p>Things cats love:</p>
@@ -89,7 +89,7 @@ assert(code.match(/p\s*{\s*font-size\s*:\s*16\s*px\s*;\s*}/i));
 <main>
   <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
 
-  <a href="#"><img src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+  <a href="#"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
 
   <div>
     <p>Things cats love:</p>

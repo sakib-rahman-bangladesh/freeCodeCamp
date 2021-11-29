@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// Package Utilities
-import React, { Component } from 'react';
 import { Grid, Col, Row } from '@freecodecamp/react-bootstrap';
+import { graphql } from 'gatsby';
+import React, { Component } from 'react';
+import Helmet from 'react-helmet';
+import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { graphql } from 'gatsby';
-import Helmet from 'react-helmet';
-import { withTranslation } from 'react-i18next';
-import { createSelector } from 'reselect';
 import type { Dispatch } from 'redux';
+import { createSelector } from 'reselect';
 
-// Local Utilities
-import {
-  ChallengeNodeType,
-  ChallengeMetaType
-} from '../../../../redux/prop-types';
+import Spacer from '../../../../components/helpers/spacer';
+import LearnLayout from '../../../../components/layouts/learn';
+import { ChallengeNode, ChallengeMeta } from '../../../../redux/prop-types';
+import ChallengeDescription from '../../components/Challenge-Description';
+import Hotkeys from '../../components/Hotkeys';
+import ChallengeTitle from '../../components/challenge-title';
+import CompletionModal from '../../components/completion-modal';
+import HelpModal from '../../components/help-modal';
 import {
   challengeMounted,
   isChallengeCompletedSelector,
@@ -24,15 +26,8 @@ import {
   updateSolutionFormValues
 } from '../../redux';
 import { getGuideUrl } from '../../utils';
-import LearnLayout from '../../../../components/layouts/learn';
-import ChallengeTitle from '../../components/challenge-title';
-import ChallengeDescription from '../../components/Challenge-Description';
-import Spacer from '../../../../components/helpers/spacer';
 import SolutionForm from '../solution-form';
 import ProjectToolPanel from '../tool-panel';
-import CompletionModal from '../../components/completion-modal';
-import HelpModal from '../../components/HelpModal';
-import Hotkeys from '../../components/Hotkeys';
 
 // Redux Setup
 const mapStateToProps = createSelector(
@@ -56,14 +51,14 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 // Types
 interface ProjectProps {
   challengeMounted: (arg0: string) => void;
-  data: { challengeNode: ChallengeNodeType };
+  data: { challengeNode: ChallengeNode };
   isChallengeCompleted: boolean;
   openCompletionModal: () => void;
   pageContext: {
-    challengeMeta: ChallengeMetaType;
+    challengeMeta: ChallengeMeta;
   };
-  t: (arg0: string) => string;
-  updateChallengeMeta: (arg0: ChallengeMetaType) => void;
+  t: TFunction;
+  updateChallengeMeta: (arg0: ChallengeMeta) => void;
   updateSolutionFormValues: () => void;
 }
 
@@ -122,11 +117,11 @@ class Project extends Component<ProjectProps> {
   }
 
   handleSubmit({
-    isShouldCompletionModalOpen
+    showCompletionModal
   }: {
-    isShouldCompletionModalOpen: boolean;
+    showCompletionModal: boolean;
   }): void {
-    if (isShouldCompletionModalOpen) {
+    if (showCompletionModal) {
       this.props.openCompletionModal();
     }
   }
@@ -140,6 +135,7 @@ class Project extends Component<ProjectProps> {
           forumTopicId,
           title,
           description,
+          instructions,
           superBlock,
           block,
           translationPending
@@ -168,8 +164,6 @@ class Project extends Component<ProjectProps> {
           <Grid>
             <Row>
               <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
                 <Spacer />
                 <ChallengeTitle
                   block={block}
@@ -179,7 +173,10 @@ class Project extends Component<ProjectProps> {
                 >
                   {title}
                 </ChallengeTitle>
-                <ChallengeDescription description={description} />
+                <ChallengeDescription
+                  description={description}
+                  instructions={instructions}
+                />
                 <SolutionForm
                   challengeType={challengeType}
                   description={description}
@@ -191,8 +188,6 @@ class Project extends Component<ProjectProps> {
                   guideUrl={getGuideUrl({ forumTopicId, title })}
                 />
                 <br />
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
                 <Spacer />
               </Col>
               <CompletionModal
@@ -222,6 +217,7 @@ export const query = graphql`
       forumTopicId
       title
       description
+      instructions
       challengeType
       helpCategory
       superBlock

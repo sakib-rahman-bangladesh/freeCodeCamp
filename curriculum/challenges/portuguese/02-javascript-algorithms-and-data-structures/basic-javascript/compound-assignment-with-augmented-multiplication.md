@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244b1
-title: Atribuição Composta Com Multiplicação Aumentada
+title: Atribuir de modo composto com multiplicação aumentada
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/c83vrfa'
 forumTopicId: 16662
@@ -15,7 +15,7 @@ O operador `*=` multiplica uma variável por um número.
 myVar = myVar * 5;
 ```
 
-irá multiplicar `myVar` por `5`. Isto pode ser reescrito como:
+multiplicará `myVar` por `5`. Essa expressão pode ser reescrita assim:
 
 ```js
 myVar *= 5;
@@ -55,9 +55,9 @@ Você não deve modificar o código acima do comentário especificado.
 
 ```js
 assert(
-  /var a = 5;/.test(code) &&
-    /var b = 12;/.test(code) &&
-    /var c = 4\.6;/.test(code)
+  /let a = 5;/.test(code) &&
+    /let b = 12;/.test(code) &&
+    /let c = 4\.6;/.test(code)
 );
 ```
 
@@ -72,9 +72,9 @@ assert(
 ## --seed-contents--
 
 ```js
-var a = 5;
-var b = 12;
-var c = 4.6;
+let a = 5;
+let b = 12;
+let c = 4.6;
 
 // Only change code below this line
 a = a * 5;
@@ -85,9 +85,9 @@ c = c * 10;
 # --solutions--
 
 ```js
-var a = 5;
-var b = 12;
-var c = 4.6;
+let a = 5;
+let b = 12;
+let c = 4.6;
 
 a *= 5;
 b *= 3;

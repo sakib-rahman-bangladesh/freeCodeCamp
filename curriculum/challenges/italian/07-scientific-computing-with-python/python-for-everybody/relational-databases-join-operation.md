@@ -1,8 +1,12 @@
 ---
 id: 5e7b9f180b6c005b0e76f08f
-title: 'Relational Databases: Join Operation'
+title: 'Database Relazionali: operazione Join'
 challengeType: 11
 videoId: jvDw3D9GKac
+bilibiliIds:
+  aid: 804461215
+  bvid: BV1Ry4y1j7tv
+  cid: 377542880
 dashedName: relational-databases-join-operation
 ---
 
@@ -10,19 +14,19 @@ dashedName: relational-databases-join-operation
 
 ## --text--
 
-When using a JOIN clause in an SQL statement, what does ON do?
+Quando si utilizza una clausola JOIN in una dichiarazione SQL, cosa fa ON?
 
 ## --answers--
 
-It indicates what tables to perform the JOIN on.
+Indica su quali tabelle eseguire il JOIN.
 
 ---
 
-It specifies the fields to use for the JOIN.
+Specifica i campi da usare per il JOIN.
 
 ---
 
-It indicates how the two tables are to be joined.
+Indica come le due tabelle devono essere unite.
 
 ## --video-solution--
 

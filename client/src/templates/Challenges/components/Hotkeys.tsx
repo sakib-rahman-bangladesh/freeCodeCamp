@@ -1,43 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { navigate } from 'gatsby';
 import React from 'react';
 import { HotKeys, GlobalHotKeys } from 'react-hotkeys';
-import { navigate } from 'gatsby';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { ChallengeFiles, Test } from '../../../redux/prop-types';
 
-import { canFocusEditorSelector, setEditorFocusability } from '../redux';
+import {
+  canFocusEditorSelector,
+  setEditorFocusability,
+  challengeFilesSelector,
+  submitChallenge,
+  challengeTestsSelector
+} from '../redux';
 import './hotkeys.css';
 
 const mapStateToProps = createSelector(
   canFocusEditorSelector,
-  (canFocusEditor: boolean) => ({
-    canFocusEditor
+  challengeFilesSelector,
+  challengeTestsSelector,
+  (canFocusEditor: boolean, challengeFiles: ChallengeFiles, tests: Test[]) => ({
+    canFocusEditor,
+    challengeFiles,
+    tests
   })
 );
 
-const mapDispatchToProps = { setEditorFocusability };
+const mapDispatchToProps = { setEditorFocusability, submitChallenge };
 
 const keyMap = {
-  NAVIGATION_MODE: 'escape',
-  EXECUTE_CHALLENGE: ['ctrl+enter', 'command+enter'],
-  FOCUS_EDITOR: 'e',
-  FOCUS_INSTRUCTIONS_PANEL: 'r',
-  NAVIGATE_PREV: ['p'],
-  NAVIGATE_NEXT: ['n']
+  navigationMode: 'escape',
+  executeChallenge: ['ctrl+enter', 'command+enter'],
+  focusEditor: 'e',
+  focusInstructionsPanel: 'r',
+  navigatePrev: ['p'],
+  navigateNext: ['n']
 };
 
 interface HotkeysProps {
   canFocusEditor: boolean;
+  challengeFiles: ChallengeFiles;
   children: React.ReactElement;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editorRef?: React.Ref<HTMLElement> | any;
-  executeChallenge?: () => void;
+  executeChallenge?: (options?: { showCompletionModal: boolean }) => void;
+  submitChallenge: () => void;
   innerRef: React.Ref<HTMLElement> | unknown;
   instructionsPanelRef?: React.RefObject<HTMLElement>;
   nextChallengePath: string;
   prevChallengePath: string;
   setEditorFocusability: (arg0: boolean) => void;
+  tests: Test[];
+  usesMultifileEditor?: boolean;
 }
 
 function Hotkeys({
@@ -49,33 +64,49 @@ function Hotkeys({
   innerRef,
   nextChallengePath,
   prevChallengePath,
-  setEditorFocusability
+  setEditorFocusability,
+  submitChallenge,
+  tests,
+  usesMultifileEditor
 }: HotkeysProps): JSX.Element {
   const handlers = {
-    EXECUTE_CHALLENGE: (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    executeChallenge: (e: React.KeyboardEvent<HTMLButtonElement>) => {
       // the 'enter' part of 'ctrl+enter' stops HotKeys from listening, so it
       // needs to be prevented.
       // TODO: 'enter' on its own also disables HotKeys, but default behaviour
       // should not be prevented in that case.
       e.preventDefault();
-      if (executeChallenge) executeChallenge();
+
+      if (!executeChallenge) return;
+
+      const testsArePassing = tests.every(test => test.pass && !test.err);
+
+      if (usesMultifileEditor) {
+        if (testsArePassing) {
+          submitChallenge();
+        } else {
+          executeChallenge();
+        }
+      } else {
+        executeChallenge({ showCompletionModal: true });
+      }
     },
-    FOCUS_EDITOR: (e: React.KeyboardEvent) => {
+    focusEditor: (e: React.KeyboardEvent) => {
       e.preventDefault();
       if (editorRef && editorRef.current) {
         editorRef.current.focus();
       }
     },
-    FOCUS_INSTRUCTIONS_PANEL: () => {
+    focusInstructionsPanel: () => {
       if (instructionsPanelRef && instructionsPanelRef.current) {
         instructionsPanelRef.current.focus();
       }
     },
-    NAVIGATION_MODE: () => setEditorFocusability(false),
-    NAVIGATE_PREV: () => {
+    navigationMode: () => setEditorFocusability(false),
+    navigatePrev: () => {
       if (!canFocusEditor) void navigate(prevChallengePath);
     },
-    NAVIGATE_NEXT: () => {
+    navigateNext: () => {
       if (!canFocusEditor) void navigate(nextChallengePath);
     }
   };

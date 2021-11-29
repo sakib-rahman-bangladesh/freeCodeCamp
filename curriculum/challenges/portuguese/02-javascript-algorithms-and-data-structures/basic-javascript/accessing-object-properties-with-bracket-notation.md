@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244c8
-title: Acessando Propriedades de Objeto com Notação de Colchetes
+title: Acessar propriedades de objeto com notação de colchetes
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cBvmEHP'
 forumTopicId: 16163
@@ -9,18 +9,19 @@ dashedName: accessing-object-properties-with-bracket-notation
 
 # --description--
 
-A segunda forma para acessar as propriedades de um objeto é a notação de colchetes (`[]`). Se a propriedade do objeto que você está tentando acessar possui um espaço no seu nome, você irá precisar usar a notação de colchetes.
+A segunda forma para acessar as propriedades de um objeto é a notação de colchetes (`[]`). Se a propriedade do objeto que você está tentando acessar possui um espaço no seu nome, você precisará usar a notação de colchetes.
 
 No entanto, você ainda pode usar a notação de colchetes nas propriedades dos objetos sem espaços.
 
 Aqui está um exemplo usando a notação de colchetes para ler uma propriedade de um objeto:
 
 ```js
-var myObj = {
+const myObj = {
   "Space Name": "Kirk",
   "More Space": "Spock",
   "NoSpace": "USS Enterprise"
 };
+
 myObj["Space Name"];
 myObj['More Space'];
 myObj["NoSpace"];
@@ -78,26 +79,25 @@ assert(code.match(/testObj\s*?\[('|")[^'"]+\1\]/g).length > 1);
 
 ```js
 // Setup
-var testObj = {
+const testObj = {
   "an entree": "hamburger",
   "my side": "veggies",
   "the drink": "water"
 };
 
 // Only change code below this line
-
-var entreeValue = testObj;   // Change this line
-var drinkValue = testObj;    // Change this line
+const entreeValue = testObj;   // Change this line
+const drinkValue = testObj;    // Change this line
 ```
 
 # --solutions--
 
 ```js
-var testObj = {
+const testObj = {
   "an entree": "hamburger",
   "my side": "veggies",
   "the drink": "water"
 };
-var entreeValue = testObj["an entree"];
-var drinkValue = testObj['the drink'];
+const entreeValue = testObj["an entree"];
+const drinkValue = testObj['the drink'];
 ```

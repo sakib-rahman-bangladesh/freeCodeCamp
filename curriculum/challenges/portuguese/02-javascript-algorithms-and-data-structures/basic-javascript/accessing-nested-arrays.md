@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244cd
-title: Acessando Arrays Aninhados
+title: Acessar arrays aninhados
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cLeGDtZ'
 forumTopicId: 16160
@@ -14,7 +14,7 @@ Como vimos em exemplos anteriores, objetos podem conter tanto objetos aninhados 
 Aqui está um exemplo de como se acessar um array aninhado:
 
 ```js
-var ourPets = [
+const ourPets = [
   {
     animalType: "cat",
     names: [
@@ -32,6 +32,7 @@ var ourPets = [
     ]
   }
 ];
+
 ourPets[0].names[1];
 ourPets[1].names[0];
 ```
@@ -50,7 +51,7 @@ Usando a notação de ponto e de colchetes, defina a variável `secondTree` para
 assert(secondTree === 'pine');
 ```
 
-Seu código deve usar notação de ponto e colchetes para acessar `myPlants`.
+O código deve usar notação de ponto e colchetes para acessar `myPlants`.
 
 ```js
 assert(/=\s*myPlants\[1\].list\[1\]/.test(code));
@@ -72,7 +73,7 @@ assert(/=\s*myPlants\[1\].list\[1\]/.test(code));
 ## --seed-contents--
 
 ```js
-var myPlants = [
+const myPlants = [
   {
     type: "flowers",
     list: [
@@ -91,13 +92,13 @@ var myPlants = [
   }
 ];
 
-var secondTree = "";
+const secondTree = "";
 ```
 
 # --solutions--
 
 ```js
-var myPlants = [
+const myPlants = [
   {
     type: "flowers",
     list: [
@@ -116,5 +117,5 @@ var myPlants = [
   }
 ];
 
-var secondTree = myPlants[1].list[1];
+const secondTree = myPlants[1].list[1];
 ```

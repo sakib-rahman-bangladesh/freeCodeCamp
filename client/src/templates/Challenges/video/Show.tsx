@@ -1,29 +1,26 @@
 // Package Utilities
-import React, { Component } from 'react';
 import { Button, Grid, Col, Row } from '@freecodecamp/react-bootstrap';
+import { graphql } from 'gatsby';
+import React, { Component } from 'react';
+import Helmet from 'react-helmet';
+import { ObserveKeys } from 'react-hotkeys';
+import { TFunction, withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { graphql } from 'gatsby';
-import Helmet from 'react-helmet';
-import YouTube from 'react-youtube';
-import { createSelector } from 'reselect';
-import { ObserveKeys } from 'react-hotkeys';
-import { withTranslation } from 'react-i18next';
 import type { Dispatch } from 'redux';
+import { createSelector } from 'reselect';
 
 // Local Utilities
-import PrismFormatted from '../components/prism-formatted';
-import {
-  ChallengeNodeType,
-  ChallengeMetaType
-} from '../../../redux/prop-types';
-import LearnLayout from '../../../components/layouts/learn';
-import ChallengeTitle from '../components/challenge-title';
-import ChallengeDescription from '../components/Challenge-Description';
-import Spacer from '../../../components/helpers/spacer';
-import CompletionModal from '../components/completion-modal';
-import Hotkeys from '../components/Hotkeys';
 import Loader from '../../../components/helpers/loader';
+import Spacer from '../../../components/helpers/spacer';
+import LearnLayout from '../../../components/layouts/learn';
+import { ChallengeNode, ChallengeMeta } from '../../../redux/prop-types';
+import ChallengeDescription from '../components/Challenge-Description';
+import Hotkeys from '../components/Hotkeys';
+import VideoPlayer from '../components/VideoPlayer';
+import ChallengeTitle from '../components/challenge-title';
+import CompletionModal from '../components/completion-modal';
+import PrismFormatted from '../components/prism-formatted';
 import {
   isChallengeCompletedSelector,
   challengeMounted,
@@ -56,15 +53,15 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 // Types
 interface ShowVideoProps {
   challengeMounted: (arg0: string) => void;
-  data: { challengeNode: ChallengeNodeType };
+  data: { challengeNode: ChallengeNode };
   description: string;
   isChallengeCompleted: boolean;
   openCompletionModal: () => void;
   pageContext: {
-    challengeMeta: ChallengeMetaType;
+    challengeMeta: ChallengeMeta;
   };
-  t: (arg0: string) => string;
-  updateChallengeMeta: (arg0: ChallengeMetaType) => void;
+  t: TFunction;
+  updateChallengeMeta: (arg0: ChallengeMeta) => void;
   updateSolutionFormValues: () => void;
 }
 
@@ -112,6 +109,7 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
       helpCategory
     });
     challengeMounted(challengeMeta.id);
+    this._container?.focus();
   }
 
   componentDidUpdate(prevProps: ShowVideoProps): void {
@@ -161,7 +159,7 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
     });
   };
 
-  videoIsReady = () => {
+  onVideoLoad = () => {
     this.setState({
       videoIsLoaded: true
     });
@@ -178,6 +176,8 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
           block,
           translationPending,
           videoId,
+          videoLocaleIds,
+          bilibiliIds,
           question: { text, answers, solution }
         }
       },
@@ -205,8 +205,6 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
           />
           <Grid>
             <Row>
-              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-              {/* @ts-ignore */}
               <Spacer />
               <ChallengeTitle
                 block={block}
@@ -224,30 +222,19 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
                       <Loader />
                     </div>
                   ) : null}
-                  <YouTube
-                    className={
-                      this.state.videoIsLoaded
-                        ? 'display-youtube-video'
-                        : 'hide-youtube-video'
-                    }
-                    onReady={this.videoIsReady}
-                    opts={{
-                      playerVars: {
-                        rel: 0
-                      },
-                      width: 'auto',
-                      height: 'auto'
-                    }}
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  <VideoPlayer
+                    bilibiliIds={bilibiliIds}
+                    onVideoLoad={this.onVideoLoad}
+                    title={title}
                     videoId={videoId}
+                    videoIsLoaded={this.state.videoIsLoaded}
+                    videoLocaleIds={videoLocaleIds}
                   />
                 </div>
               </Col>
               <Col md={8} mdOffset={2} sm={10} smOffset={1} xs={12}>
                 <ChallengeDescription description={description} />
                 <PrismFormatted className={'line-numbers'} text={text} />
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
                 <Spacer />
                 <ObserveKeys>
                   <div className='video-quiz-options'>
@@ -277,8 +264,6 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
                     ))}
                   </div>
                 </ObserveKeys>
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
                 <Spacer />
                 <div
                   style={{
@@ -291,8 +276,6 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
                     <span>{t('learn.check-answer')}</span>
                   )}
                 </div>
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
                 <Spacer />
                 <Button
                   block={true}
@@ -304,8 +287,6 @@ class ShowVideo extends Component<ShowVideoProps, ShowVideoState> {
                 >
                   {t('buttons.check-answer')}
                 </Button>
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
                 <Spacer size={2} />
               </Col>
               <CompletionModal
@@ -332,6 +313,16 @@ export const query = graphql`
   query VideoChallenge($slug: String!) {
     challengeNode(fields: { slug: { eq: $slug } }) {
       videoId
+      videoLocaleIds {
+        espanol
+        italian
+        portuguese
+      }
+      bilibiliIds {
+        aid
+        bvid
+        cid
+      }
       title
       description
       challengeType

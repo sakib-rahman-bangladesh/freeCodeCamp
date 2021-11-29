@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244ca
-title: Usando Objetos para Pesquisas
+title: Usar objetos para pesquisas
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cdBk8sM'
 forumTopicId: 18373
@@ -14,7 +14,7 @@ Objetos podem ser pensados como armazenamento de chave/valor, como um dicionári
 Aqui está um exemplo de uma simples pesquisa reversa no alfabeto:
 
 ```js
-var alpha = {
+const alpha = {
   1:"Z",
   2:"Y",
   3:"X",
@@ -24,10 +24,11 @@ var alpha = {
   25:"B",
   26:"A"
 };
+
 alpha[2];
 alpha[24];
 
-var value = 2;
+const value = 2;
 alpha[value];
 ```
 
@@ -35,7 +36,7 @@ alpha[value];
 
 # --instructions--
 
-Converta a instrução switch em um objeto chamado `lookup`. Use ele para pesquisar por `val` e atribua a string associada para a variável `result`.
+Converta a instrução switch em um objeto chamado `lookup`. Use-o para pesquisar por `val` e atribua a string associada para a variável `result`.
 
 # --hints--
 
@@ -102,7 +103,7 @@ assert(
 ```js
 // Setup
 function phoneticLookup(val) {
-  var result = "";
+  let result = "";
 
   // Only change code below this line
   switch(val) {
@@ -136,9 +137,9 @@ phoneticLookup("charlie");
 
 ```js
 function phoneticLookup(val) {
-  var result = "";
+  let result = "";
 
-  var lookup = {
+  const lookup = {
     alpha: "Adams",
     bravo: "Boston",
     charlie: "Chicago",

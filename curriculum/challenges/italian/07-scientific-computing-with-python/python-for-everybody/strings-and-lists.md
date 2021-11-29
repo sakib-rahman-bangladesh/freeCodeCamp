@@ -1,22 +1,26 @@
 ---
 id: 5e7b9f090b6c005b0e76f066
-title: Strings and Lists
+title: Stringhe e liste
 challengeType: 11
 videoId: lxcFa7ldCi0
+bilibiliIds:
+  aid: 804401443
+  bvid: BV1By4y1j7F9
+  cid: 376385517
 dashedName: strings-and-lists
 ---
 
 # --description--
 
-More resources:
+Altre risorse:
 
-\- [Exercise](https://www.youtube.com/watch?v=-9TfJF2dwHI)
+\- [Esercizio](https://www.youtube.com/watch?v=-9TfJF2dwHI)
 
 # --question--
 
 ## --text--
 
-What does n equal in this code?
+Quanto vale n in questo codice?
 
 ```python
 words = 'His e-mail is q-lar@freecodecamp.org'

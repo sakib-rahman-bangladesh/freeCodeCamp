@@ -1,24 +1,28 @@
 ---
 id: 5e7b9f060b6c005b0e76f059
-title: More Conditional Structures
+title: Ulteriori strutture condizionali
 challengeType: 11
 videoId: HdL82tAZR20
+bilibiliIds:
+  aid: 631930118
+  bvid: BV1Nb4y1r7z2
+  cid: 376337449
 dashedName: more-conditional-structures
 ---
 
 # --description--
 
-More resources:
+Altre risorse:
 
-\- [Exercise 1](https://www.youtube.com/watch?v=crLerB4ZxMI)
+\- [Esercizio 1](https://www.youtube.com/watch?v=crLerB4ZxMI)
 
-\- [Exercise 2](https://www.youtube.com/watch?v=KJN3-7HH6yk)
+\- [Esercizio 2](https://www.youtube.com/watch?v=KJN3-7HH6yk)
 
 # --question--
 
 ## --text--
 
-Given the following code:
+Dato il seguente codice:
 
 ```python
 temp = "5 degrees"
@@ -28,7 +32,7 @@ cel = (fahr - 32.0) * 5.0 / 9.0
 print(cel)
 ```
 
-Which line/lines should be surrounded by `try` block?
+Quali righe dovrebbero essere racchiuse nel blocco `try`?
 
 ## --answers--
 
@@ -48,7 +52,7 @@ Which line/lines should be surrounded by `try` block?
 
 ---
 
-None
+Nessuna
 
 ## --video-solution--
 

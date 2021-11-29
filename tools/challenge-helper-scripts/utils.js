@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const matter = require('gray-matter');
 const ObjectID = require('bson-objectid');
-const { parseMDSync } = require('../challenge-parser/parser');
+const matter = require('gray-matter');
 const {
   getMetaData
 } = require('../challenge-helper-scripts/helpers/get-project-path-metadata');
-const { getStepTemplate } = require('./helpers/get-step-template');
+const { parseMDSync } = require('../challenge-parser/parser');
 const { getProjectMetaPath } = require('./helpers/get-project-meta-path');
 const { getProjectPath } = require('./helpers/get-project-path');
+const { getStepTemplate } = require('./helpers/get-step-template');
 const { padWithLeadingZeros } = require('./helpers/pad-with-leading-zeros');
 
 const createStepFile = ({
@@ -29,7 +29,7 @@ const createStepFile = ({
     stepNum
   });
 
-  fs.writeFileSync(`${projectPath}part-${finalStepNum}.md`, template);
+  fs.writeFileSync(`${projectPath}step-${finalStepNum}.md`, template);
 
   return challengeId;
 };
@@ -69,7 +69,7 @@ const reorderSteps = () => {
     const newStepNum = i + 1;
     const newFileName =
       fileName !== 'final.md'
-        ? `part-${padWithLeadingZeros(newStepNum)}.md`
+        ? `step-${padWithLeadingZeros(newStepNum)}.md`
         : 'final.md';
     return {
       oldFileName: fileName,
@@ -89,8 +89,8 @@ const reorderSteps = () => {
     const frontMatter = matter.read(filePath);
     const challengeID = frontMatter.data.id || ObjectID();
     const title =
-      newFileName === 'final.md' ? 'Final Prototype' : `Part ${newStepNum}`;
-    const dashedName = `part-${newStepNum}`;
+      newFileName === 'final.md' ? 'Final Prototype' : `Step ${newStepNum}`;
+    const dashedName = `step-${newStepNum}`;
     challengeOrder.push(['' + challengeID, title]);
     const newData = {
       ...frontMatter.data,
@@ -113,7 +113,7 @@ const reorderSteps = () => {
 };
 
 const getChallengeSeeds = challengeFilePath => {
-  return parseMDSync(challengeFilePath).files;
+  return parseMDSync(challengeFilePath).challengeFiles;
 };
 
 module.exports = {

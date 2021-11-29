@@ -1,9 +1,9 @@
 ---
 id: 5ea8adfab628f68d805bfc5e
-title: Learn Bash by Building a Boilerplate
+title: Aprenda Bash criando um boilerplate
 challengeType: 12
 helpCategory: Relational Databases
-url: https://github.com/freeCodeCamp/.learn-bash-by-building-a-boilerplate
+url: https://github.com/freeCodeCamp/learn-bash-by-building-a-boilerplate
 dashedName: learn-bash-by-building-a-boilerplate
 ---
 

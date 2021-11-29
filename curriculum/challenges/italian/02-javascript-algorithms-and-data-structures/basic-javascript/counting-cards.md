@@ -9,7 +9,7 @@ dashedName: counting-cards
 
 # --description--
 
-Nel gioco di casinò Blackjack, un giocatore può guadagnare un vantaggio rispetto alla casa tenendo traccia del numero relativo di carte alte e basse rimanenti nel mazzo. Questo si chiama [Conteggio delle carte](https://en.wikipedia.org/wiki/Card_counting).
+Nel gioco di casinò Blackjack, un giocatore può guadagnare un vantaggio rispetto alla casa tenendo traccia del numero relativo di carte alte e basse rimanenti nel mazzo. Questo si chiama [Conteggio delle carte](https://it.wikipedia.org/wiki/Conteggio_delle_carte).
 
 Avere più carte alte rimanenti nel mazzo favorisce il giocatore. Ad ogni carta è assegnato un valore secondo la tabella sottostante. Quando il conteggio è positivo, il giocatore dovrebbe puntare alto. Quando il conteggio è zero o negativo, il giocatore dovrebbe puntare basso.
 
@@ -159,7 +159,7 @@ assert(
 ## --seed-contents--
 
 ```js
-var count = 0;
+let count = 0;
 
 function cc(card) {
   // Only change code below this line
@@ -175,7 +175,7 @@ cc(2); cc(3); cc(7); cc('K'); cc('A');
 # --solutions--
 
 ```js
-var count = 0;
+let count = 0;
 function cc(card) {
   switch(card) {
     case 2:

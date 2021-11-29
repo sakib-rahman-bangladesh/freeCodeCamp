@@ -16,7 +16,7 @@ Possiamo anche usare l'operatore `+=` per <dfn>concatenare</dfn> una stringa all
 Esempio:
 
 ```js
-var ourStr = "I come first. ";
+let ourStr = "I come first. ";
 ourStr += "I come second.";
 ```
 
@@ -24,7 +24,7 @@ ourStr += "I come second.";
 
 # --instructions--
 
-Costruisci `myStr` su diverse righe concatenando queste due stringhe: `This is the first sentence.` e `This is the second sentence.` usando l'operatore `+=`. Usa l'operatore `+=` in modo simile a quello mostrato nell'esempio. Inizia assegnando la prima stringa a `myStr`, quindi aggiungi la seconda.
+Costruisci `myStr` su diverse righe concatenando queste due stringhe: `This is the first sentence.` e `This is the second sentence.` usando l'operatore `+=`. Usa l'operatore `+=` in modo simile a quello mostrato nell'esempio e assicurati di includere uno spazio tra le due stringhe. Inizia assegnando la prima stringa a `myStr`, quindi aggiungi la seconda.
 
 # --hints--
 
@@ -57,14 +57,12 @@ assert(code.match(/myStr\s*\+=\s*(["']).*\1/g));
 ## --seed-contents--
 
 ```js
-// Only change code below this line
-
-var myStr;
+let myStr;
 ```
 
 # --solutions--
 
 ```js
-var myStr = "This is the first sentence. ";
+let myStr = "This is the first sentence. ";
 myStr += "This is the second sentence.";
 ```

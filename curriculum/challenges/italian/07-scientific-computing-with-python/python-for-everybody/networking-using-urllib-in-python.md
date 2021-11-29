@@ -1,8 +1,12 @@
 ---
 id: 5e7b9f0d0b6c005b0e76f075
-title: 'Networking: Using urllib in Python'
+title: 'Networking: usare urllib in Python'
 challengeType: 11
 videoId: 7lFM1T_CxBs
+bilibiliIds:
+  aid: 546908270
+  bvid: BV1Xq4y1H7e6
+  cid: 377331524
 dashedName: networking-using-urllib-in-python
 ---
 
@@ -10,7 +14,7 @@ dashedName: networking-using-urllib-in-python
 
 ## --text--
 
-What will the output of the following code be like?:
+Quale sarà l'output del seguente codice?
 
 ```python
 import urllib.request
@@ -21,15 +25,15 @@ for line in fhand:
 
 ## --answers--
 
-Just contents of "romeo.txt".
+Solo i contenuti di "romeo.txt".
 
 ---
 
-A header and the contents of "romeo.txt".
+Un'intestazione e il contenuto di "romeo.txt".
 
 ---
 
-A header, a footer, and the contents of "romeo.txt".
+Un'intestazione, un piè di pagina e il contenuto di "romeo.txt".
 
 ## --video-solution--
 

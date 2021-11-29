@@ -1,8 +1,12 @@
 ---
 id: 5e8f2f13c4cdbe86b5c72da6
-title: Conclusion
+title: Conclusione
 challengeType: 11
 videoId: LMNub5frQi4
+bilibiliIds:
+  aid: 208033449
+  bvid: BV1Wh411p79h
+  cid: 409139716
 dashedName: conclusion
 ---
 
@@ -10,19 +14,19 @@ dashedName: conclusion
 
 ## --text--
 
-Most people that are experts in AI or machine learning usually...:
+La maggior parte delle persone che sono esperte in IA o machine learning di solito...:
 
 ## --answers--
 
-have one specialization.
+hanno una specializzazione.
 
 ---
 
-have many specializations.
+hanno molte specializzazioni.
 
 ---
 
-have a deep understanding of many different frameworks.
+hanno una profonda comprensione di molti framework diversi.
 
 ## --video-solution--
 

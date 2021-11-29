@@ -1,6 +1,6 @@
 ---
 id: 5675e877dbd60be8ad28edc6
-title: Itere através de um Array com Laço For
+title: Iterar através de um array com laço for
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/caeR3HB'
 forumTopicId: 18216
@@ -9,16 +9,17 @@ dashedName: iterate-through-an-array-with-a-for-loop
 
 # --description--
 
-Uma tarefa comum em JavaScript é para iterar através do conteúdo de um array. Uma forma de fazer isso é com um laço `for`. Esse código irá exibir cada elemento do array `arr` no console:
+Uma tarefa comum em JavaScript é para iterar através do conteúdo de um array. Uma forma de fazer isso é com um laço `for`. Esse código vai exibir cada elemento do array `arr` no console:
 
 ```js
-var arr = [10, 9, 8, 7, 6];
-for (var i = 0; i < arr.length; i++) {
+const arr = [10, 9, 8, 7, 6];
+
+for (let i = 0; i < arr.length; i++) {
    console.log(arr[i]);
 }
 ```
 
-Lembre-se de que arrays têm indexação baseada em zero, o que significa que o último índice do array é de `length - 1`. Nossa condição para esse laço é `i < arr.length`, a qual interrompe o laço quando `i` é igual a `length`. Nesse caso a última iteração é ` i === 4` i.e. quando `i` se tornar igual a `arr.length - 1` e exibe `6` no console. Em seguida, `i` aumenta para `5`, e o laço é interrompido porque `i < arr.length` é `false`.
+Lembre-se de que arrays têm indexação baseada em zero, o que significa que o último índice do array é de `length - 1`. Nossa condição para esse laço é `i < arr.length`, que interrompe o laço quando `i` é igual a `length`. Nesse caso a última iteração é `i === 4`, ou seja, quando `i` se tornar igual a `arr.length - 1` e exibir `6` no console. Em seguida, `i` aumenta para `5`, e o laço é interrompido porque `i < arr.length` é `false`.
 
 # --instructions--
 
@@ -62,18 +63,19 @@ assert(!__helpers.removeWhiteSpace(code).match(/total[=+-]0*[1-9]+/gm));
 
 ```js
 // Setup
-var myArr = [ 2, 3, 4, 5, 6];
+const myArr = [2, 3, 4, 5, 6];
 
 // Only change code below this line
+
 ```
 
 # --solutions--
 
 ```js
-var myArr = [ 2, 3, 4, 5, 6];
-var total = 0;
+const myArr = [2, 3, 4, 5, 6];
+let total = 0;
 
-for (var i = 0; i < myArr.length; i++) {
+for (let i = 0; i < myArr.length; i++) {
   total += myArr[i];
 }
 ```

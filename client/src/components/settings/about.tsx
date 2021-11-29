@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
 import {
   FormGroup,
   ControlLabel,
   FormControl,
   HelpBlock,
   Alert
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
 } from '@freecodecamp/react-bootstrap';
+import React, { Component } from 'react';
 
+import { TFunction, withTranslation } from 'react-i18next';
 import { FullWidthRow, Spacer } from '../helpers';
+import BlockSaveButton from '../helpers/form/block-save-button';
+import SoundSettings from './sound';
 import ThemeSettings from './theme';
 import UsernameSettings from './username';
-import BlockSaveButton from '../helpers/form/block-save-button';
-import { withTranslation } from 'react-i18next';
 
 type FormValues = {
   name: string;
@@ -29,9 +28,11 @@ type AboutProps = {
   name: string;
   picture: string;
   points: number;
+  sound: boolean;
   submitNewAbout: (formValues: FormValues) => void;
-  t: (str: string) => string;
+  t: TFunction;
   toggleNightMode: (theme: string) => void;
+  toggleSoundMode: (sound: boolean) => void;
   username: string;
 };
 
@@ -141,7 +142,10 @@ class AboutSettings extends Component<AboutProps, AboutState> {
   }
 
   loadEvent = () => this.setState({ isPictureUrlValid: true });
-  errorEvent = () => this.setState({ isPictureUrlValid: false });
+  errorEvent = () =>
+    this.setState(state => ({
+      isPictureUrlValid: state.formValues.picture === ''
+    }));
 
   handlePictureChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value.slice(0);
@@ -159,7 +163,9 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     if (this.state.isPictureUrlValid === false) {
       return (
         <HelpBlock>
-          <Alert bsStyle='info'>{t('validation.url-not-image')}</Alert>
+          <Alert bsStyle='info' closeLabel={t('buttons.close')}>
+            {t('validation.url-not-image')}
+          </Alert>
         </HelpBlock>
       );
     } else {
@@ -181,7 +187,14 @@ class AboutSettings extends Component<AboutProps, AboutState> {
     const {
       formValues: { name, location, picture, about }
     } = this.state;
-    const { currentTheme, username, t, toggleNightMode } = this.props;
+    const {
+      currentTheme,
+      sound,
+      username,
+      t,
+      toggleNightMode,
+      toggleSoundMode
+    } = this.props;
     return (
       <div className='about-settings'>
         <UsernameSettings username={username} />
@@ -214,7 +227,6 @@ class AboutSettings extends Component<AboutProps, AboutState> {
               </ControlLabel>
               <FormControl
                 onChange={this.handlePictureChange}
-                required={true}
                 type='url'
                 value={picture}
               />
@@ -239,6 +251,7 @@ class AboutSettings extends Component<AboutProps, AboutState> {
             currentTheme={currentTheme}
             toggleNightMode={toggleNightMode}
           />
+          <SoundSettings sound={sound} toggleSoundMode={toggleSoundMode} />
         </FullWidthRow>
       </div>
     );

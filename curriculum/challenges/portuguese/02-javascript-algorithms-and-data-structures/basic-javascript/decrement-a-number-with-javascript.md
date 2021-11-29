@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244ad
-title: Decremente um Número com JavaScript
+title: Decrementar um número com JavaScript
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cM2KeS2'
 forumTopicId: 17558
@@ -21,7 +21,7 @@ i--;
 i = i - 1;
 ```
 
-**Nota:** A linha inteira torna-se `i--;`, eliminando a necessidade para o sinal de igual (atribuição).
+**Observação:** a linha inteira torna-se `i--;`, eliminando a necessidade para o sinal de igual (atribuição).
 
 # --instructions--
 
@@ -39,7 +39,7 @@ assert(myVar === 10);
 
 ```js
 assert(
-  /var\s*myVar\s*=\s*11;\s*\/*.*\s*([-]{2}\s*myVar|myVar\s*[-]{2});/.test(code)
+  /let\s*myVar\s*=\s*11;\s*\/*.*\s*([-]{2}\s*myVar|myVar\s*[-]{2});/.test(code)
 );
 ```
 
@@ -52,7 +52,7 @@ assert(/[-]{2}\s*myVar|myVar\s*[-]{2}/.test(code));
 Você não deve alterar o código acima do comentário especificado.
 
 ```js
-assert(/var myVar = 11;/.test(code));
+assert(/let myVar = 11;/.test(code));
 ```
 
 # --seed--
@@ -66,7 +66,7 @@ assert(/var myVar = 11;/.test(code));
 ## --seed-contents--
 
 ```js
-var myVar = 11;
+let myVar = 11;
 
 // Only change code below this line
 myVar = myVar - 1;
@@ -75,6 +75,6 @@ myVar = myVar - 1;
 # --solutions--
 
 ```js
-var myVar = 11;
+let myVar = 11;
 myVar--;
 ```

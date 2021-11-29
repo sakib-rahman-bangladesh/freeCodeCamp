@@ -1,6 +1,6 @@
 ---
 id: 587d7dab367417b2b2512b70
-title: Introdução à Aplicação Parcial e Currying
+title: Iniciar com currying e aplicação parcial
 challengeType: 1
 forumTopicId: 301232
 dashedName: introduction-to-currying-and-partial-application
@@ -12,7 +12,7 @@ A <dfn>aridade</dfn> de uma função é o número de argumentos que ela toma. Re
 
 Em outras palavras, a função é reestruturada para que ela receba apenas um argumento e retorne outra função que recebe o próximo argumento e assim por diante.
 
-Um exemplo:
+Exemplo:
 
 ```js
 function unCurried(x, y) {
@@ -35,17 +35,18 @@ curried(1)(2)
 Isso é útil em seu programa quando você não pode fornecer todos os argumentos para uma função de uma só vez. Você pode salvar cada chamada de função em uma variável, que será uma referência à função retornada que recebe o próximo argumento quando ele estiver disponível. Um exemplo usando a função do exemplo acima:
 
 ```js
-var funcForY = curried(1);
+const funcForY = curried(1);
 console.log(funcForY(2)); // 3
 ```
 
-Da mesma forma, <dfn>aplicação parcial</dfn> pode ser descrita como a aplicação de alguns argumentos a uma função e o retorno de outra função à qual é aplicada a mais argumentos. Um exemplo:
+Da mesma forma, <dfn>aplicação parcial</dfn> pode ser descrita como a aplicação de alguns argumentos a uma função e o retorno de outra função à qual é aplicada a mais argumentos. Exemplo:
 
 ```js
 function impartial(x, y, z) {
   return x + y + z;
 }
-var partialFn = impartial.bind(this, 1, 2);
+
+const partialFn = impartial.bind(this, 1, 2);
 partialFn(10); // 13
 ```
 
@@ -73,7 +74,7 @@ assert(add(1)(2)(3) === 6);
 assert(add(11)(22)(33) === 66);
 ```
 
-Em seu código deve haver uma instrução final que retorna `x + y + z`.
+No código deve haver uma instrução final que retorna `x + y + z`.
 
 ```js
 assert(code.match(/[xyz]\s*?\+\s*?[xyz]\s*?\+\s*?[xyz]/g));
@@ -90,6 +91,7 @@ function add(x) {
 
   // Only change code above this line
 }
+
 add(10)(20)(30);
 ```
 

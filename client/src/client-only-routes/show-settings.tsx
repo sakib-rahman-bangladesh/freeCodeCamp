@@ -1,46 +1,47 @@
-import React, { Fragment } from 'react';
+import { Grid } from '@freecodecamp/react-bootstrap';
+import React from 'react';
+import Helmet from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { Grid } from '@freecodecamp/react-bootstrap';
-import Helmet from 'react-helmet';
 
 import envData from '../../../config/env.json';
+import { createFlashMessage } from '../components/Flash/redux';
+import { Loader, Spacer } from '../components/helpers';
+import Certification from '../components/settings/Certification';
+import About from '../components/settings/about';
+import DangerZone from '../components/settings/danger-zone';
+import Email from '../components/settings/email';
+import Honesty from '../components/settings/honesty';
+import Internet from '../components/settings/internet';
+import Portfolio from '../components/settings/portfolio';
+import Privacy from '../components/settings/privacy';
+import WebhookToken from '../components/settings/webhook-token';
 import {
   signInLoadingSelector,
   userSelector,
   isSignedInSelector,
   hardGoTo as navigate
 } from '../redux';
+import { User } from '../redux/prop-types';
 import { submitNewAbout, updateUserFlag, verifyCert } from '../redux/settings';
-import { createFlashMessage } from '../components/Flash/redux';
-import { useTranslation } from 'react-i18next';
 
-import { Loader, Spacer } from '../components/helpers';
-import About from '../components/settings/about';
-import Privacy from '../components/settings/privacy';
-import Email from '../components/settings/email';
-import Internet from '../components/settings/internet';
-import Portfolio from '../components/settings/portfolio';
-import Honesty from '../components/settings/honesty';
-import Certification from '../components/settings/Certification';
-import { UserType } from '../redux/prop-types';
-import DangerZone from '../components/settings/danger-zone';
-
-const { apiLocation } = envData;
+const { apiLocation, showUpcomingChanges } = envData;
 
 // TODO: update types for actions
-interface IShowSettingsProps {
-  createFlashMessage: (paylaod: string[]) => void;
+interface ShowSettingsProps {
+  createFlashMessage: typeof createFlashMessage;
   isSignedIn: boolean;
   navigate: (location: string) => void;
   showLoading: boolean;
   submitNewAbout: () => void;
   toggleNightMode: (theme: string) => void;
+  toggleSoundMode: (sound: boolean) => void;
   updateInternetSettings: () => void;
   updateIsHonest: () => void;
   updatePortfolio: () => void;
   updateQuincyEmail: (isSendQuincyEmail: boolean) => void;
-  user: UserType;
+  user: User;
   verifyCert: () => void;
   path?: string;
 }
@@ -49,7 +50,7 @@ const mapStateToProps = createSelector(
   signInLoadingSelector,
   userSelector,
   isSignedInSelector,
-  (showLoading: boolean, user: UserType, isSignedIn) => ({
+  (showLoading: boolean, user: User, isSignedIn) => ({
     showLoading,
     user,
     isSignedIn
@@ -61,6 +62,7 @@ const mapDispatchToProps = {
   navigate,
   submitNewAbout,
   toggleNightMode: (theme: string) => updateUserFlag({ theme }),
+  toggleSoundMode: (sound: boolean) => updateUserFlag({ sound }),
   updateInternetSettings: updateUserFlag,
   updateIsHonest: updateUserFlag,
   updatePortfolio: updateUserFlag,
@@ -69,13 +71,14 @@ const mapDispatchToProps = {
   verifyCert
 };
 
-export function ShowSettings(props: IShowSettingsProps): JSX.Element {
+export function ShowSettings(props: ShowSettingsProps): JSX.Element {
   const { t } = useTranslation();
   const {
     createFlashMessage,
     isSignedIn,
     submitNewAbout,
     toggleNightMode,
+    toggleSoundMode,
     user: {
       completedChallenges,
       email,
@@ -102,6 +105,7 @@ export function ShowSettings(props: IShowSettingsProps): JSX.Element {
       picture,
       points,
       theme,
+      sound,
       location,
       name,
       githubProfile,
@@ -144,8 +148,10 @@ export function ShowSettings(props: IShowSettingsProps): JSX.Element {
             name={name}
             picture={picture}
             points={points}
+            sound={sound}
             submitNewAbout={submitNewAbout}
             toggleNightMode={toggleNightMode}
+            toggleSoundMode={toggleSoundMode}
             username={username}
           />
           <Spacer />
@@ -193,6 +199,8 @@ export function ShowSettings(props: IShowSettingsProps): JSX.Element {
             username={username}
             verifyCert={verifyCert}
           />
+          {showUpcomingChanges && <Spacer />}
+          {showUpcomingChanges && <WebhookToken />}
           <Spacer />
           <DangerZone />
         </main>

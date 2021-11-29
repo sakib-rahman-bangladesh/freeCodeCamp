@@ -1,8 +1,12 @@
 ---
 id: 5e7b9f070b6c005b0e76f05e
-title: 'Iterations: Loop Idioms'
+title: 'Iterazioni: idiomi dei cicli'
 challengeType: 11
 videoId: AelGAcoMXbI
+bilibiliIds:
+  aid: 334491369
+  bvid: BV1tw411R7Mm
+  cid: 376530765
 dashedName: iterations-loop-idioms
 ---
 
@@ -10,7 +14,7 @@ dashedName: iterations-loop-idioms
 
 ## --text--
 
-Below is code to find the smallest value from a list of values. One line has an error that will cause the code to not work as expected. Which line is it?:
+Di seguito è riportato il codice per trovare il valore più piccolo in una lista. Una riga contiene un errore che causerà il mancato funzionamento del codice come previsto. Qual è la linea?
 
 ```python
 smallest = None

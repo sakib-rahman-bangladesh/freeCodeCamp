@@ -1,6 +1,6 @@
 ---
 id: af4afb223120f7348cdfc9fd
-title: Mapear o Debris
+title: Mapear órbitas
 challengeType: 5
 forumTopicId: 16021
 dashedName: map-the-debris
@@ -51,8 +51,8 @@ assert.deepEqual(
 
 ```js
 function orbitalPeriod(arr) {
-  var GM = 398600.4418;
-  var earthRadius = 6367.4447;
+  const GM = 398600.4418;
+  const earthRadius = 6367.4447;
   return arr;
 }
 
@@ -63,9 +63,9 @@ orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
 
 ```js
 function orbitalPeriod(arr) {
-  var GM = 398600.4418;
-  var earthRadius = 6367.4447;
-  var TAU = 2 * Math.PI;
+  const GM = 398600.4418;
+  const earthRadius = 6367.4447;
+  const TAU = 2 * Math.PI;
   return arr.map(function(obj) {
     return {
       name: obj.name,
@@ -73,6 +73,4 @@ function orbitalPeriod(arr) {
     };
   });
 }
-
-orbitalPeriod([{name : "sputkin", avgAlt : 35873.5553}]);
 ```

@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244b7
-title: Concatenando Strings com Operador Mais
+title: Concatenar strings com o operador mais
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cNpM8AN'
 forumTopicId: 16802
@@ -9,7 +9,7 @@ dashedName: concatenating-strings-with-plus-operator
 
 # --description--
 
-Em JavaScript, quando o operador `+` é usado com um valor de `String`, ele é chamado de operador de <dfn>concatenação</dfn>. Você pode construir uma nova string a partir de outras strings ao <dfn>concatenar</dfn> elas juntos.
+Em JavaScript, quando o operador `+` é usado com um valor de `String`, ele é chamado de operador de <dfn>concatenação</dfn>. Você pode criar uma nova string a partir de outras strings ao <dfn>concatenar</dfn> elas juntos.
 
 **Exemplo**
 
@@ -17,18 +17,18 @@ Em JavaScript, quando o operador `+` é usado com um valor de `String`, ele é c
 'My name is Alan,' + ' I concatenate.'
 ```
 
-**Nota:** Cuidado com os espaços. A concatenação não adiciona espaços entre strings concatenadas, então você mesmo precisará adicioná-las.
+**Observação:** cuidado com os espaços. A concatenação não adiciona espaços entre strings concatenadas, então você mesmo precisará adicioná-las.
 
 Exemplo:
 
 ```js
-var ourStr = "I come first. " + "I come second.";
+const ourStr = "I come first. " + "I come second.";
 ```
 
 A string `I come first. I come second.` seria exibida no console.
 # --instructions--
 
-Construa `myStr` a partir das strings `This is the start.` e `This is the end.` usando o operador `+`.
+Crie `myStr` a partir das strings `This is the start.` e `This is the end.` usando o operador `+`. Não se esqueça de incluir um espaço entre as duas strings.
 
 # --hints--
 
@@ -38,16 +38,16 @@ Construa `myStr` a partir das strings `This is the start.` e `This is the end.` 
 assert(myStr === 'This is the start. This is the end.');
 ```
 
-Você deve usar o operador `+` para construir `myStr`.
+Você deve usar o operador `+` para criar `myStr`.
 
 ```js
 assert(code.match(/(["']).*\1\s*\+\s*(["']).*\2/g));
 ```
 
-`myStr` deve ser criado usando a palavra-chave `var`.
+`myStr` deve ser criada usando a palavra-chave `const`.
 
 ```js
-assert(/var\s+myStr/.test(code));
+assert(/const\s+myStr/.test(code));
 ```
 
 Você deve atribuir o resultado à variável `myStr`.
@@ -73,11 +73,11 @@ assert(/myStr\s*=/.test(code));
 ## --seed-contents--
 
 ```js
-var myStr; // Change this line
+const myStr = ""; // Change this line
 ```
 
 # --solutions--
 
 ```js
-var myStr = "This is the start. " + "This is the end.";
+const myStr = "This is the start. " + "This is the end.";
 ```

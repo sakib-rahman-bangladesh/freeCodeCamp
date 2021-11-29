@@ -1,8 +1,12 @@
 ---
 id: 5ea9997bbec2e9bc47e94db3
-title: Developing a Banner Grabber
+title: Sviluppare un Banner Grabber
 challengeType: 11
 videoId: CeGW761BIsA
+bilibiliIds:
+  aid: 633014533
+  bvid: BV1Sb4y127H9
+  cid: 409036288
 dashedName: developing-a-banner-grabber
 ---
 
@@ -10,7 +14,7 @@ dashedName: developing-a-banner-grabber
 
 ## --text--
 
-Fill in the blanks to complete the `banner` function below:
+Riempi gli spazi vuoti per completare la funzione `banner` qui sotto:
 
 ```py
 def banner(ip, port):

@@ -1,8 +1,12 @@
 ---
 id: 5e8f2f13c4cdbe86b5c72d88
-title: Introduction to TensorFlow
+title: Introduzione a TensorFlow
 challengeType: 11
 videoId: r9hRyGGjOgQ
+bilibiliIds:
+  aid: 675554869
+  bvid: BV1dU4y1w7vw
+  cid: 409126541
 dashedName: introduction-to-tensorflow
 ---
 
@@ -10,11 +14,11 @@ dashedName: introduction-to-tensorflow
 
 ## --text--
 
-Which of the following is **not** a type of tensor?
+Quale dei seguenti elementi **non** è un tipo di tensore?
 
 ## --answers--
 
-Variable
+Variabile
 
 ---
 
@@ -22,7 +26,7 @@ Flowing
 
 ---
 
-Placeholder
+Segnaposto (placeholder)
 
 ---
 
@@ -30,7 +34,7 @@ SparseTensor
 
 ---
 
-Constant
+Costante
 
 ## --video-solution--
 

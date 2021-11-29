@@ -1,8 +1,12 @@
 ---
 id: 5e8f2f13c4cdbe86b5c72d95
-title: 'Neural Networks: Creating a Model'
+title: 'Reti neurali: creare un modello'
 challengeType: 11
 videoId: K8bz1bmOCTw
+bilibiliIds:
+  aid: 848109040
+  bvid: BV1EL4y1878f
+  cid: 409130886
 dashedName: neural-networks-creating-a-model
 ---
 
@@ -10,7 +14,7 @@ dashedName: neural-networks-creating-a-model
 
 ## --text--
 
-Fill in the blanks below to build a sequential model of dense layers:
+Riempi gli spazi vuoti qui sotto per costruire un modello sequenziale di livelli densi:
 
 ```py
 model = __A__.__B__([

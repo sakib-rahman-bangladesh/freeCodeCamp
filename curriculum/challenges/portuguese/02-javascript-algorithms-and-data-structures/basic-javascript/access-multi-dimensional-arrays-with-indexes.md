@@ -1,6 +1,6 @@
 ---
 id: 56592a60ddddeae28f7aa8e1
-title: Acessar Arrays Multidimensionais com Índices
+title: Acessar arrays multidimensionais com índices
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/ckND4Cq'
 forumTopicId: 16159
@@ -9,17 +9,18 @@ dashedName: access-multi-dimensional-arrays-with-indexes
 
 # --description--
 
-Uma maneira de pensar em um array <dfn>multi-dimensional</dfn> é como um *array de arrays*. Quando você usa colchetes para acessar seu array, o primeiro conjunto de colchetes se refere às entradas no array mais exterior (o primeiro nível), e cada par adicional de colchetes refere-se ao próximo nível de entradas interno.
+Uma maneira de pensar em um array <dfn>multidimensional</dfn> é como um *array de arrays*. Quando você usa colchetes para acessar seu array, o primeiro conjunto de colchetes se refere às entradas no array mais exterior (o primeiro nível), e cada par adicional de colchetes refere-se ao próximo nível de entradas interno.
 
 **Exemplo**
 
 ```js
-var arr = [
-  [1,2,3],
-  [4,5,6],
-  [7,8,9],
-  [[10,11,12], 13, 14]
+const arr = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+  [[10, 11, 12], 13, 14]
 ];
+
 arr[3];
 arr[3][0];
 arr[3][0][1];
@@ -27,11 +28,11 @@ arr[3][0][1];
 
 `arr[3]` é `[[10, 11, 12], 13, 14]`, `arr[3][0]` é `[10, 11, 12]`, e `arr[3][0][1]` é `11`.
 
-**Nota:** Não deve haver nenhum espaço entre o nome do array e os colchetes como `array [0][0]` e até mesmo `array [0] [0]` não é permitido. Embora JavaScript seja capaz de processar isso corretamente, isso pode confundir outros programadores lendo seu código.
+**Observação:** não deve haver nenhum espaço entre o nome do array e os colchetes como `array [0][0]` e até mesmo `array [0] [0]` não é permitido. Embora JavaScript seja capaz de processar isso corretamente, isso pode confundir outros programadores lendo seu código.
 
 # --instructions--
 
-Utilizando notação de colchetes selecione um elemento de `myArray` de forma que `myData` seja igual a `8`.
+Utilizando notação de colchetes, selecione um elemento de `myArray` de forma que `myData` seja igual a `8`.
 
 # --hints--
 
@@ -58,14 +59,19 @@ if(typeof myArray !== "undefined"){(function(){return "myData: " + myData + " my
 ## --seed-contents--
 
 ```js
-var myArray = [[1,2,3], [4,5,6], [7,8,9], [[10,11,12], 13, 14]];
+const myArray = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+  [[10, 11, 12], 13, 14],
+];
 
-var myData = myArray[0][0];
+const myData = myArray[0][0];
 ```
 
 # --solutions--
 
 ```js
-var myArray = [[1,2,3],[4,5,6], [7,8,9], [[10,11,12], 13, 14]];
-var myData = myArray[2][1];
+const myArray = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [[10, 11, 12], 13, 14]];
+const myData = myArray[2][1];
 ```

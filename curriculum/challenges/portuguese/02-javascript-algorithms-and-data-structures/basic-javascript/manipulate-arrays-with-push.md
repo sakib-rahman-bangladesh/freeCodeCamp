@@ -1,6 +1,6 @@
 ---
 id: 56bbb991ad1ed5201cd392cb
-title: Manipule Arrays Com push()
+title: Manipular arrays com push()
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/cnqmVtJ'
 forumTopicId: 18237
@@ -16,10 +16,10 @@ Uma forma fácil de adicionar dados no final de um array é através da função
 Exemplos:
 
 ```js
-var arr1 = [1,2,3];
+const arr1 = [1, 2, 3];
 arr1.push(4);
 
-var arr2 = ["Stimpson", "J", "cat"];
+const arr2 = ["Stimpson", "J", "cat"];
 arr2.push(["happy", "joy"]);
 ```
 
@@ -27,7 +27,7 @@ arr2.push(["happy", "joy"]);
 
 # --instructions--
 
-Empurre `["dog", 3]` no final da variável `myArray`.
+Empurre `["dog", 3]` para o final da variável `myArray`.
 
 # --hints--
 
@@ -64,14 +64,15 @@ assert(
 
 ```js
 // Setup
-var myArray = [["John", 23], ["cat", 2]];
+const myArray = [["John", 23], ["cat", 2]];
 
 // Only change code below this line
+
 ```
 
 # --solutions--
 
 ```js
-var myArray = [["John", 23], ["cat", 2]];
+const myArray = [["John", 23], ["cat", 2]];
 myArray.push(["dog",3]);
 ```

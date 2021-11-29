@@ -1,8 +1,12 @@
 ---
 id: 5e7b9f0e0b6c005b0e76f07a
-title: Using Web Services
+title: Usare i servizi web
 challengeType: 11
 videoId: oNl1OVDPGKE
+bilibiliIds:
+  aid: 759406136
+  bvid: BV1b64y16746
+  cid: 377332189
 dashedName: using-web-services
 ---
 
@@ -10,27 +14,27 @@ dashedName: using-web-services
 
 ## --text--
 
-What are the two most common ways to send data over the internet?
+Quali sono i due modi più comuni per inviare dati su Internet?
 
 ## --answers--
 
-JSON and TXT
+JSON e TXT
 
 ---
 
-JSON and XML
+JSON e XML
 
 ---
 
-XML and TXT
+XML e TXT
 
 ---
 
-XML and PHP
+XML e PHP
 
 ---
 
-PHP and TXT
+PHP e TXT
 
 ## --video-solution--
 

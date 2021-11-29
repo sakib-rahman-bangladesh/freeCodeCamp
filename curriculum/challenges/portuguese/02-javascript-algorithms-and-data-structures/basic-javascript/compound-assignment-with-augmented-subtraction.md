@@ -1,6 +1,6 @@
 ---
 id: 56533eb9ac21ba0edf2244b0
-title: Atribuição Composta Com Subtração Aumentada
+title: Atribuir de modo composto com subtração aumentada
 challengeType: 1
 videoUrl: 'https://scrimba.com/c/c2Qv7AV'
 forumTopicId: 16660
@@ -15,7 +15,7 @@ Como o operador `+=`, `-=` subtrai um número de uma variável.
 myVar = myVar - 5;
 ```
 
-irá subtrair `5` de `myVar`. Isto pode ser reescrito como:
+vai subtrair `5` de `myVar`. Essa expressão pode ser reescrita assim:
 
 ```js
 myVar -= 5;
@@ -55,7 +55,7 @@ Você não deve modificar o código acima do comentário especificado.
 
 ```js
 assert(
-  /var a = 11;/.test(code) && /var b = 9;/.test(code) && /var c = 3;/.test(code)
+  /let a = 11;/.test(code) && /let b = 9;/.test(code) && /let c = 3;/.test(code)
 );
 ```
 
@@ -70,9 +70,9 @@ assert(
 ## --seed-contents--
 
 ```js
-var a = 11;
-var b = 9;
-var c = 3;
+let a = 11;
+let b = 9;
+let c = 3;
 
 // Only change code below this line
 a = a - 6;
@@ -83,9 +83,9 @@ c = c - 1;
 # --solutions--
 
 ```js
-var a = 11;
-var b = 9;
-var c = 3;
+let a = 11;
+let b = 9;
+let c = 3;
 
 a -= 6;
 b -= 15;
